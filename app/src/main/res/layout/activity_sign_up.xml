@@ -20,7 +20,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/emailSignUp"
-                android:hint="School Email Address"
+                android:hint="School Email Address (.edu)"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
@@ -84,6 +84,17 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/linear1"
             android:layout_margin="50dp"
+    />
+
+    <ProgressBar
+            android:id="@+id/signUpProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signUpBtn"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/signUp"
     />
 
 </RelativeLayout>
