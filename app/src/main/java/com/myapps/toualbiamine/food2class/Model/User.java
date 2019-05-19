@@ -1,6 +1,6 @@
 package com.myapps.toualbiamine.food2class.Model;
 
-public class User {
+public class User {     //No need to store the email address since it will be the primary key retrieved directly from db.
 
     private String name;
     private String password;

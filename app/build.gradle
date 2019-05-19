@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.myapps.toualbiamine.food2go"
+        applicationId "com.myapps.toualbiamine.food2class"
         minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
@@ -32,5 +32,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
 
 }
+
+apply plugin: 'com.google.gms.google-services'
