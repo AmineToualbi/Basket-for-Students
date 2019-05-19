@@ -1,4 +1,4 @@
-package com.myapps.toualbiamine.food2go
+package com.myapps.toualbiamine.food2class
 
 import org.junit.Test
 

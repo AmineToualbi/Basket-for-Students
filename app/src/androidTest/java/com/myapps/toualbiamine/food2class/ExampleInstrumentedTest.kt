@@ -1,4 +1,4 @@
-package com.myapps.toualbiamine.food2go
+package com.myapps.toualbiamine.food2class
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
