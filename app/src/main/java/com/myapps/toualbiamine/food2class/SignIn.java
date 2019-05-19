@@ -1,6 +1,7 @@
 package com.myapps.toualbiamine.food2class;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.firebase.database.*;
+import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -59,14 +61,24 @@ public class SignIn extends AppCompatActivity {
                             User user = dataSnapshot.child(signInEmail).getValue(User.class);
 
                             if (user.getPassword().equals(signInPassword)) {
+
                                 Toast.makeText(getApplicationContext(), "Signed In!", Toast.LENGTH_SHORT).show();
+                                Intent goToHome = new Intent(getApplicationContext(), Home.class);
+                                Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
+                                startActivity(goToHome);
+                                finish();
+
                             } else {
+
                                 Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
+
                             }
 
                         }
                         else {
+
                             Toast.makeText(getApplicationContext(), "No account found for the email address!", Toast.LENGTH_SHORT).show();
+
                         }
 
                     }

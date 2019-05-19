@@ -31,7 +31,7 @@
             app:met_primaryColor="@color/white"
             app:met_singleLineEllipsis="true"
             android:layout_gravity="center"
-            android:text="mohamedtoualbi@suumail.net"
+            android:text="mohamedtoualbi@students.suu.edu"
             android:textAlignment="center"
             />
 
@@ -48,7 +48,7 @@
                 app:met_primaryColor="@color/white"
                 app:met_singleLineEllipsis="true"
                 android:layout_gravity="center"
-                android:text="passwrde"
+                android:text="1234"
                 android:textAlignment="center"
         />
 

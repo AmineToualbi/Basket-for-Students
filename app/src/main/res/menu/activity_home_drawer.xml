@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view" >
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_menu"
+                android:icon="@drawable/ic_restaurant_black_24dp"
+                android:title="Menu"
+                android:iconTint="@color/white"
+        />
+        <item
+                android:id="@+id/nav_cart"
+                android:icon="@drawable/ic_shopping_cart_black_24dp"
+                android:title="Cart"
+                android:iconTint="@color/white"
+        />
+        <item
+                android:id="@+id/nav_orders"
+                android:icon="@drawable/ic_local_pizza_black_24dp"
+                android:title="Orders"
+                android:iconTint="@color/white"
+        />
+        <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="Sign Out"
+                android:iconTint="@color/white"
+        />
+
+    </group>
+
+    <item android:title="">
+
+        <menu>
+
+            <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Share"/>
+            <item
+                    android:id="@+id/nav_support"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Support"/>
+        </menu>
+    </item>
+
+</menu>

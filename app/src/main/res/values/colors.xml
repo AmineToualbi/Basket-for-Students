@@ -4,4 +4,7 @@
     <color name="signUp">#FF009688</color>
     <color name="signIn">#8BC34A</color>
     <color name="black">#000000</color>
+    <color name="overlayBackground">#7F333639</color>
+    <color name="overlayActionBar">#0E0D0E</color>
+    <color name="actionBarColor">#1C5F59</color>
 </resources>
