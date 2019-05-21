@@ -1,7 +1,12 @@
 # Food2Go
 
 Android app to order food from the different places on a school's campus from your phone. Currently in development. 
-Backend is handled using Firebase. 
+
+# Functionality
+Firebase real-time database storage for backend.
+Picasso for caching of images retrieved. 
+RecyclerView & CardView for UI. 
+FirebaseUI to easily populate our RecyclerView with UI elements retrieved from the Firebase database.
 
 
 # UI
