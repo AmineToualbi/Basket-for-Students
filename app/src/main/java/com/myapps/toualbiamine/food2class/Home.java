@@ -1,11 +1,13 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,6 +39,8 @@ public class Home extends AppCompatActivity
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
+
+     FirebaseRecyclerAdapter<Restaurant, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,7 @@ public class Home extends AppCompatActivity
         if(Common.currentUser!=null)
             userName.setText(Common.currentUser.getName());
 
-        //Load the menu.
+        //Load the menu & RecyclerView.
         recycler_menu = (RecyclerView) findViewById(R.id.recyclerMenu);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -89,24 +93,35 @@ public class Home extends AppCompatActivity
 
     }
 
+    //FirebaseUI -> https://firebaseopensource.com/projects/firebase/firebaseui-android/database/readme.md/
     private void loadMenu() {
 
-        FirebaseRecyclerAdapter<Restaurant, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Restaurant, MenuViewHolder>(Restaurant.class,
+         adapter = new FirebaseRecyclerAdapter<Restaurant, MenuViewHolder>(Restaurant.class,
                 R.layout.menu_item, MenuViewHolder.class, restaurant) {
+
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Restaurant model, int position) {
+
                 viewHolder.menuName.setText(model.getName());
+
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.menuImg);
-                final Restaurant clickItem = model;
+
+                final Restaurant restaurantSelected = model;
+
+                //What happens when user clicks on item? Send RestaurantID to new Activity to show its food.
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+clickItem.getName(), Toast.LENGTH_SHORT).show();
+                        Intent foodList = new Intent(getApplicationContext(), FoodList.class);
+                        //RestaurantID = key of the restaurant in our db.
+                        foodList.putExtra("RestaurantID", adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
             }
         };
+
         recycler_menu.setAdapter(adapter);
 
     }
