@@ -1,5 +1,6 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,10 +65,13 @@ public class FoodList extends AppCompatActivity {
     //"Food": {
     //        ".indexOn":["restaurantID"]
     //      }
+    //Use FirebaseUI if you have RecyclerView w ViewHolder to populate it easily!
     private void loadFoodList(String restaurantID) {
 
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item, FoodViewHolder.class,
+                //orderByChild -> returns Query where child nodes are ordered by restaurantIDs.
+                //equalTo -> return Query of child node with constrained value.
                 foodList.orderByChild("restaurantID").equalTo(restaurantID))    //Select * FROM Foods where RestaurantID = restaurantID
         {
             @Override
@@ -83,7 +87,12 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getApplicationContext(), ""+foodSelected.getName(), Toast.LENGTH_SHORT).show();
+
+                        Intent foodDetail = new Intent(getApplicationContext(), FoodDetail.class);
+                        //Send FoodID to new page!
+                        foodDetail.putExtra("FoodID", adapter.getRef(position).getKey());
+                        startActivity(foodDetail);
+
                     }
                 });
 

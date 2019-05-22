@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         appSlogan = (TextView) findViewById(R.id.slogan);
 
         Typeface font = getResources().getFont(R.font.nabila);
-        appSlogan.setTypeface(font);
+        appSlogan.setTypeface(font);        //Change font of slogan in main screen.
+
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override

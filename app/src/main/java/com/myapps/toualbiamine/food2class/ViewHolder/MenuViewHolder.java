@@ -8,6 +8,13 @@ import android.widget.TextView;
 import com.myapps.toualbiamine.food2class.Interface.ItemClickListener;
 import com.myapps.toualbiamine.food2class.R;
 
+/*Steps to creating & implementing a RecyclerView:
+    1. Create an activity that will contain it, i.e.: FoodList.
+    2. Create a Card for the items that will be displayed in the list.
+    3. Create a ViewHolder following the implementation below.
+    4. Do ur thing in FoodList.
+ */
+
 public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView menuName;

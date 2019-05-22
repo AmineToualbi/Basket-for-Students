@@ -20,8 +20,11 @@ public class SignIn extends AppCompatActivity {
 
     EditText emailInput;
     EditText passwordInput;
+
     Button btnSignIn;
+
     ProgressBar signInProgressBar;
+
     final String TAG = "SignInActivity";
 
     @Override
@@ -31,7 +34,9 @@ public class SignIn extends AppCompatActivity {
 
         emailInput = (MaterialEditText) findViewById(R.id.emailSignIn);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignIn);
+
         btnSignIn = (Button) findViewById(R.id.signInBtn);
+
         signInProgressBar = (ProgressBar) findViewById(R.id.signInProgressBar);
         signInProgressBar.setVisibility(View.INVISIBLE);
 
@@ -45,10 +50,12 @@ public class SignIn extends AppCompatActivity {
 
                 signInProgressBar.setVisibility(View.VISIBLE);
 
+                //Get the data by querying the database.
                 tableUser.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        //Data inputted by the user -> credentials.
                         String signInEmail = convertToFirebaseFormat(emailInput.getText().toString());
                         String signInPassword = passwordInput.getText().toString();
 
@@ -62,7 +69,6 @@ public class SignIn extends AppCompatActivity {
 
                             if (user.getPassword().equals(signInPassword)) {
 
-                                Toast.makeText(getApplicationContext(), "Signed In!", Toast.LENGTH_SHORT).show();
                                 Intent goToHome = new Intent(getApplicationContext(), Home.class);
                                 Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
                                 startActivity(goToHome);

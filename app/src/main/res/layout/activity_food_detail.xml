@@ -15,14 +15,15 @@
            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
            android:fitsSystemWindows="true">
 
+       <!-- ContentScrim sets the color of the Toolbar when collapsing -->
        <android.support.design.widget.CollapsingToolbarLayout
                android:id="@+id/collapsingToolbar"
                android:layout_width="match_parent"
                android:layout_height="350dp"
                android:fitsSystemWindows="true"
                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-               app:contentScrim="#0e0d0e"
-               app:expandedTitleTextAppearance="@android:color/transparent"
+               app:contentScrim="#070707"
+               app:expandedTitleTextAppearance="@color/actionBarColor"
        >
 
            <ImageView
@@ -32,13 +33,14 @@
                    android:contentDescription="@null"
                    android:scaleType="centerCrop"
                    app:layout_collapseMode="pin"
-                   android:background="@color/actionBarColor"/>
+                   android:background="@color/white"/>
 
            <android.support.v7.widget.Toolbar
-                   android:id="@+id/toolbar"
+                   android:id="@+id/foodDetailToolbar"
                    android:layout_width="match_parent"
                    android:layout_height="?attr/actionBarSize"
                    app:title="Food Name"
+                   app:titleTextColor="@color/actionBarColor"
                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                    app:layout_collapseMode="parallax"
            >

@@ -1,5 +1,6 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,11 @@ public class SignUp extends AppCompatActivity {
     EditText emailInput;
     EditText nameInput;
     EditText passwordInput;
+
     Button signUpBtn;
+
     ProgressBar signUpProgressBar;
+
     final String TAG = "SignUpActivity";
 
     @Override
@@ -30,10 +34,11 @@ public class SignUp extends AppCompatActivity {
         emailInput = (MaterialEditText) findViewById(R.id.emailSignUp);
         nameInput = (MaterialEditText) findViewById(R.id.nameSignUp);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignUp);
+
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
+
         signUpProgressBar = (ProgressBar) findViewById(R.id.signUpProgressBar);
         signUpProgressBar.setVisibility(View.INVISIBLE);
-
 
         //Initialize Firebase.
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,6 +50,7 @@ public class SignUp extends AppCompatActivity {
 
                 signUpProgressBar.setVisibility(View.VISIBLE);
 
+                //Get the data by querying the DB. This returns a snapshot of everything in the Table "User".
                 tableUser.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -61,15 +67,21 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Wrong email format (firstlast@students.suu.edu)", Toast.LENGTH_SHORT).show();
 
                         }
+
                         //Check if user already exists.
                         else if(dataSnapshot.child(signUpEmail).exists()) {
                             Toast.makeText(getApplicationContext(), "Account already exists with this email.", Toast.LENGTH_SHORT).show();
                         }
+
                         else {
 
                             User newUser = new User(signUpName, signUpPassword);
                             tableUser.child(signUpEmail).setValue(newUser);
                             Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
+
+                            Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(goToMain);
+
                             finish();
 
                         }
