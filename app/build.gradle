@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
 
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
 
 }
 
