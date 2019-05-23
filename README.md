@@ -4,10 +4,17 @@ Android app to order food from the different places on a school's campus from yo
 
 # Functionality
 Firebase real-time database storage for backend.
+
 Picasso for caching of images retrieved. 
+
 RecyclerView & CardView for UI. 
+
 FirebaseUI to easily populate our RecyclerView with UI elements retrieved from the Firebase database.
+
 Material Design features are used to provide a better UX. A CoordinatorLayout is implemented with a CollapsingToolbarLayout to create animations during user navigation. 
+
+Room & Dagger for SQLite. 
+
 
 
 # UI
