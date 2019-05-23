@@ -7,4 +7,5 @@ import com.myapps.toualbiamine.food2class.Model.User;
 public class Common {
 
     public static User currentUser;
+    public static int orderID = 0;
 }

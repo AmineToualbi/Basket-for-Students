@@ -4,15 +4,30 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.firebase.database.*;
+import com.google.gson.Gson;
+import com.myapps.toualbiamine.food2class.Application.DatabaseApp;
+import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.Food;
+import com.myapps.toualbiamine.food2class.Model.Order;
+import com.myapps.toualbiamine.food2class.Providers.IOrderProvider;
 import com.squareup.picasso.Picasso;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class FoodDetail extends AppCompatActivity {
 
@@ -32,6 +47,13 @@ public class FoodDetail extends AppCompatActivity {
 
     String foodID;
 
+    Food currentFood;
+
+    String TAG = "FoodDetailActivity";
+
+    @Inject
+    IOrderProvider orderProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +62,9 @@ public class FoodDetail extends AppCompatActivity {
         //Initialize Firebase
         database = FirebaseDatabase.getInstance();
         foods = database.getReference("Food");
+
+        DatabaseApp.component.injectFoodDetail(this);
+
 
         quantityBtn = (ElegantNumberButton) findViewById(R.id.quantityBtn);
         cartFab = (FloatingActionButton) findViewById(R.id.cartFab);
@@ -62,6 +87,51 @@ public class FoodDetail extends AppCompatActivity {
             showFoodDetail(foodID);
         }
 
+        cartFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "Order - " + foodID + " " + currentFood.getName() + " " + quantityBtn.getNumber());
+
+                Order newOrder = new Order(Common.orderID, foodID, currentFood.getName(),
+                        quantityBtn.getNumber());
+
+                Common.orderID++;
+                Log.d(TAG, "Common.OrderID = " + Common.orderID);
+
+                orderProvider.save(newOrder);
+
+                Toast.makeText(getApplicationContext(), "Added to Cart", Toast.LENGTH_SHORT).show();
+
+                final List<Order> orderData = orderProvider.getAll();
+
+                if(orderData == null || orderData.isEmpty()) {
+                    showMessage("No Data!");
+                }
+                else {
+                    String jsonData = (new Gson()).toJson(orderData);
+                    try {
+                        JSONArray jsonArray = new JSONArray(jsonData);
+                        Log.d(TAG, "jsonArray.length = " + jsonArray.length());
+                        for(int i=0; i<jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+                            Log.d(TAG, obj.getInt("orderID") + " " + obj.getString("productID")
+                            + " " + obj.getString("productName") + " " + obj.getString("quantity") + "\n");
+                        }
+                    }
+                    catch (JSONException e) {
+                        Log.d(TAG, "JSONEXCEPTION");
+                    }
+                    Log.d(TAG, jsonData);
+                }
+
+            }
+        });
+
+    }
+
+    private void showMessage(String msg) {
+        new AlertDialog.Builder(getApplicationContext()).setMessage(msg).create().show();
     }
 
     private void showFoodDetail (String foodID) {
@@ -74,7 +144,7 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Food currentFood = dataSnapshot.getValue(Food.class);
+                currentFood = dataSnapshot.getValue(Food.class);
 
                 Picasso.with(getBaseContext()).load(currentFood.getImage())
                 .into(foodImage);
