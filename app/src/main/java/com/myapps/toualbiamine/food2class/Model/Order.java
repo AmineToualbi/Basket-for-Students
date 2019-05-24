@@ -7,18 +7,18 @@ import android.arch.persistence.room.PrimaryKey;
 public class Order {
 
     @PrimaryKey int orderID;
-    String productID;
-    String productName;
+    public String menuID;       //If private => weird bug w Room.
+    public String menuName;
     String quantity;
 
     public Order() {
 
     }
 
-    public Order(int orderID, String productID, String productName, String quantity) {
+    public Order(int orderID, String menuID, String menuName, String quantity) {
         this.orderID = orderID;
-        this.productID = productID;
-        this.productName = productName;
+        this.menuID = menuID;
+        this.menuName = menuName;
         this.quantity = quantity;
     }
 
@@ -30,20 +30,20 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public String getProductID() {
-        return productID;
+    public String getmenuID() {
+        return menuID;
     }
 
-    public void setProductID(String productID) {
-        this.productID = productID;
+    public void setmenuID(String menuID) {
+        this.menuID = menuID;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getmenuName() {
+        return menuName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setmenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public String getQuantity() {

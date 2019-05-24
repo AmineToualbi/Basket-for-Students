@@ -61,7 +61,7 @@ public class FoodDetail extends AppCompatActivity {
 
         //Initialize Firebase
         database = FirebaseDatabase.getInstance();
-        foods = database.getReference("Food");
+        foods = database.getReference("Foods");
 
         DatabaseApp.component.injectFoodDetail(this);
 
@@ -115,8 +115,8 @@ public class FoodDetail extends AppCompatActivity {
                         Log.d(TAG, "jsonArray.length = " + jsonArray.length());
                         for(int i=0; i<jsonArray.length(); i++) {
                             JSONObject obj = jsonArray.getJSONObject(i);
-                            Log.d(TAG, obj.getInt("orderID") + " " + obj.getString("productID")
-                            + " " + obj.getString("productName") + " " + obj.getString("quantity") + "\n");
+                            Log.d(TAG, obj.getInt("orderID") + " " + obj.getString("menuID")
+                            + " " + obj.getString("menuName") + " " + obj.getString("quantity") + "\n");
                         }
                     }
                     catch (JSONException e) {

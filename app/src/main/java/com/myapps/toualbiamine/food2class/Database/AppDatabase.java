@@ -7,7 +7,7 @@ import com.myapps.toualbiamine.food2class.Model.Order;
 
 @Database(
         entities = {Order.class},
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {

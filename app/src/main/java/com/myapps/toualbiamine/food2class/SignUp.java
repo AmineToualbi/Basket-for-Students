@@ -42,7 +42,7 @@ public class SignUp extends AppCompatActivity {
 
         //Initialize Firebase.
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference tableUser = database.getReference("User");  //Get the table User created in the db.
+        final DatabaseReference tableUser = database.getReference("Users");  //Get the table User created in the db.
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override

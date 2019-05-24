@@ -54,15 +54,15 @@ public class Home extends AppCompatActivity
 
         //Initialize Firebase
         database = FirebaseDatabase.getInstance();
-        restaurant = database.getReference("Restaurant");
+        restaurant = database.getReference("Restaurants");
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent cart = new Intent(getApplicationContext(), Cart.class);
+                startActivity(cart);
             }
         });
 
@@ -159,6 +159,8 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
+            Intent cart = new Intent(getApplicationContext(), Cart.class);
+            startActivity(cart);
 
         } else if (id == R.id.nav_orders) {
 

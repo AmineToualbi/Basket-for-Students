@@ -39,7 +39,7 @@ public class FoodList extends AppCompatActivity {
 
         //Initialize Firebase.
         database = FirebaseDatabase.getInstance();
-        foodList = database.getReference("Food");
+        foodList = database.getReference("Foods");
 
         //Create RecyclerView.
         recyclerView = (RecyclerView) findViewById(R.id.recyclerFood);
@@ -89,7 +89,7 @@ public class FoodList extends AppCompatActivity {
                     public void onClick(View view, int position, boolean isLongClick) {
 
                         Intent foodDetail = new Intent(getApplicationContext(), FoodDetail.class);
-                        //Send FoodID to new page!
+                        //Send FoodID to new page = menuID.
                         foodDetail.putExtra("FoodID", adapter.getRef(position).getKey());
                         startActivity(foodDetail);
 
