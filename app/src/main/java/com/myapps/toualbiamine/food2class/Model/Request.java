@@ -8,6 +8,7 @@ public class Request {
     private String name;
     private List<Order> order;
     private String restriction;
+    private String status;
 
     public Request() {
 
@@ -18,6 +19,15 @@ public class Request {
         this.name = name;
         this.restriction = restriction;
         this.order = order;
+        this.status = "0";          //0: Placed. 1: Ready. 2: Picked up.
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getRestriction() {
