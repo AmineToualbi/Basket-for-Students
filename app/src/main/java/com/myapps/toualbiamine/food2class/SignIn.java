@@ -66,6 +66,7 @@ public class SignIn extends AppCompatActivity {
 
                             //Get User information.
                             User user = dataSnapshot.child(signInEmail).getValue(User.class);
+                            user.setEmail(signInEmail);
 
                             if (user.getPassword().equals(signInPassword)) {
 

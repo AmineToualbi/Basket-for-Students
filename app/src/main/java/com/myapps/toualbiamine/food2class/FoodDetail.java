@@ -97,7 +97,7 @@ public class FoodDetail extends AppCompatActivity {
                         quantityBtn.getNumber());
 
                 Common.orderID++;
-                Log.d(TAG, "Common.OrderID = " + Common.orderID);
+                Log.d(TAG, "newOrder.foodID = " + newOrder.getmenuID());
 
                 orderProvider.save(newOrder);
 

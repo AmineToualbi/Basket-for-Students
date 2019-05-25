@@ -1,19 +1,23 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.myapps.toualbiamine.food2class.Application.DatabaseApp;
+import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.Order;
+import com.myapps.toualbiamine.food2class.Model.Request;
 import com.myapps.toualbiamine.food2class.Providers.IOrderProvider;
 import com.myapps.toualbiamine.food2class.ViewHolder.CartAdapter;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -30,11 +34,17 @@ public class Cart extends AppCompatActivity {
     TextView mealSwipeTotal;
     Button placeOrderBtn;
 
-    List<Order> cart = new ArrayList<>();
+    List<Order> cart = new ArrayList<>();       //For adapter.
+    List<Order> cartData = new ArrayList<>();       //For data manipulation.
     CartAdapter adapter;
 
     @Inject
     IOrderProvider orderProvider;
+
+    Dialog dietaryRestrictionPopup;
+    Button placeOrderPopupBtn;
+    ImageButton closePopupBtn;
+    EditText restrictionEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,8 @@ public class Cart extends AppCompatActivity {
         requests = database.getReference("Requests");
 
         DatabaseApp.component.injectCart(this);
+
+        dietaryRestrictionPopup = new Dialog(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.cartRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -61,19 +73,68 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<Order> cartData = orderProvider.getAll();
+                cartData = orderProvider.getAll();
 
-                for(Order order : cartData) {
-                    orderProvider.delete(order);
+                if(cartData.isEmpty() == false) {
+                    showDietaryRestrictionPopup(cartData);
                 }
-
-                loadCart();
-
-                Toast.makeText(getApplicationContext(), "Order submitted!", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(getApplicationContext(), "Your cart is empty.", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
 
+
+
+    }
+
+    private void placeOrder(List<Order> cartData, String restriction) {
+
+        Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(),
+                restriction, cartData);
+
+        //Submit Order -> use CurrentSystemMillis as key!
+        requests.child(String.valueOf(System.currentTimeMillis())).setValue(newRequest);
+
+        for(Order order : cartData) {
+            orderProvider.delete(order);
+        }
+
+        loadCart();
+
+        Toast.makeText(getApplicationContext(), "Order submitted!", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void showDietaryRestrictionPopup(final List<Order> cartData) {
+
+        //Show the popup.
+        dietaryRestrictionPopup.setContentView(R.layout.popup_place_order_msg);
+        dietaryRestrictionPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dietaryRestrictionPopup.show();
+
+        placeOrderPopupBtn = (Button) dietaryRestrictionPopup.findViewById(R.id.submitBtn);
+        closePopupBtn = (ImageButton) dietaryRestrictionPopup.findViewById(R.id.closePopup);
+        restrictionEditText = (MaterialEditText) dietaryRestrictionPopup.findViewById(R.id.restrictionEditText);
+
+        closePopupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dietaryRestrictionPopup.dismiss();
+            }
+        });
+
+        placeOrderPopupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String restriction = restrictionEditText.getText().toString();
+                placeOrder(cartData, restriction);
+                dietaryRestrictionPopup.dismiss();
+
+            }
+        });
 
 
     }

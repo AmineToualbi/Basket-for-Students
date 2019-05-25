@@ -75,7 +75,7 @@ public class SignUp extends AppCompatActivity {
 
                         else {
 
-                            User newUser = new User(signUpName, signUpPassword);
+                            User newUser = new User(signUpEmail, signUpName, signUpPassword);
                             tableUser.child(signUpEmail).setValue(newUser);
                             Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
 

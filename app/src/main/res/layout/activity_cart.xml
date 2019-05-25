@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/signIn"
+                    android:backgroundTint="@color/actionBarColor"
                     android:textColor="@color/white"
                     android:text="Place Order"
                     android:shadowColor="@color/black"
