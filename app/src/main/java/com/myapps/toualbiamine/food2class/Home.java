@@ -167,7 +167,13 @@ public class Home extends AppCompatActivity
             startActivity(orders);
 
         } else if (id == R.id.nav_log_out) {
-
+            Intent signIn = new Intent(getApplicationContext(), SignIn.class);
+            //Flags to clean previous activity & avoid having previously entered credentials!
+            signIn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(signIn);
+            finish();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_support) {
