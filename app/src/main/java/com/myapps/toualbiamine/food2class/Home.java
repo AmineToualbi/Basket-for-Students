@@ -2,6 +2,7 @@ package com.myapps.toualbiamine.food2class;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -157,15 +158,13 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_cart) {
             Intent cart = new Intent(getApplicationContext(), Cart.class);
             startActivity(cart);
-
         } else if (id == R.id.nav_orders) {
             Intent orders = new Intent(getApplicationContext(), OrderStatus.class);
             startActivity(orders);
-
         } else if (id == R.id.nav_log_out) {
             Intent signIn = new Intent(getApplicationContext(), SignIn.class);
             //Flags to clean previous activity & avoid having previously entered credentials!
@@ -175,9 +174,16 @@ public class Home extends AppCompatActivity
             startActivity(signIn);
             finish();
         } else if (id == R.id.nav_share) {
+            //TODO - Send link of app to ur friends!
 
         } else if (id == R.id.nav_support) {
-
+            Intent support = new Intent(Intent.ACTION_SENDTO);
+            support.setData(Uri.parse("mailto:"));
+            support.putExtra(Intent.EXTRA_EMAIL, "amtoualbi@gmail.com");
+            support.putExtra(Intent.EXTRA_SUBJECT, "[Food2Class] Support Request");
+            if(support.resolveActivity(getPackageManager()) != null) {
+                startActivity(support);
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
