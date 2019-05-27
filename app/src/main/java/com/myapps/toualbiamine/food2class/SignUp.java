@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -89,10 +90,10 @@ public class SignUp extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             Log.d(TAG, "Auth Sign Up : OK");
 
-                            Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(goToMain);
+                       //     Toast.makeText(getApplicationContext(), "Verify your email to complete the creation of your account!", Toast.LENGTH_SHORT).show();
 
-                            finish();
+                            sendVerificationEmail();
+
                         }
 
                         else {
@@ -104,6 +105,35 @@ public class SignUp extends AppCompatActivity {
 
                 });
 
+
+    }
+
+    private void sendVerificationEmail() {
+
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+
+                        if (task.isSuccessful()) {
+
+                            FirebaseAuth.getInstance().signOut();
+
+                            Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(goToMain);
+
+                            finish();
+
+
+                        } else {
+                            Log.e(TAG, "sendEmailVerification", task.getException());
+                            Toast.makeText(getApplicationContext(),
+                                    "Failed to send verification email.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
     }
 
@@ -143,7 +173,7 @@ public class SignUp extends AppCompatActivity {
 
                     User newUser = new User(signUpEmail, signUpName, signUpPassword);
                     tableUser.child(signUpEmail).setValue(newUser);
-                    Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Account created. Check your email!", Toast.LENGTH_SHORT).show();
 
                     Log.d(TAG, "DB Sign Up : OK");
 
