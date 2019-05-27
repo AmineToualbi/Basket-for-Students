@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -26,6 +30,15 @@ public class SignUp extends AppCompatActivity {
 
     final String TAG = "SignUpActivity";
 
+    FirebaseDatabase database;
+    DatabaseReference tableUser;
+    FirebaseAuth firebaseAuth;
+
+    String signUpEmail;
+    String fullSignUpEmail;
+    String signUpPassword;
+    String signUpName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +54,115 @@ public class SignUp extends AppCompatActivity {
         signUpProgressBar.setVisibility(View.INVISIBLE);
 
         //Initialize Firebase.
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference tableUser = database.getReference("Users");  //Get the table User created in the db.
+        database = FirebaseDatabase.getInstance();
+        tableUser = database.getReference("Users");  //Get the table User created in the db.
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                 signUpEmail = convertToFirebaseFormat(emailInput.getText().toString());
+                 fullSignUpEmail = emailInput.getText().toString();
+                 signUpName  = nameInput.getText().toString();
+                 signUpPassword = passwordInput.getText().toString();
+                 Log.i(TAG, "Sign Up Email = " + signUpEmail);
+
+                 addUserToRealTimeDB();
+
+            }
+        });
+
+
+    }
+
+    private void signUpUserInAuth(String email, String password) {
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        signUpProgressBar.setVisibility(View.INVISIBLE);
+
+                        if(task.isSuccessful()) {
+                            Log.d(TAG, "Auth Sign Up : OK");
+
+                            Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(goToMain);
+
+                            finish();
+                        }
+
+                        else {
+                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Auth Sign Up : ERR " + task.getException().getMessage());
+
+                        }
+                    }
+
+                });
+
+
+    }
+
+    private void addUserToRealTimeDB() {
+
+        signUpProgressBar.setVisibility(View.VISIBLE);
+
+        //Get data in the DB once only. addValueEventListener listens to every data change.
+        tableUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                //Check if wrong email format.
+                if(signUpEmail.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Wrong email format (firstlast@students.suu.edu)", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Toast 1");
+                    signUpProgressBar.setVisibility(View.INVISIBLE);
+
+                }
+
+                //Check if user already exists.
+                else if(dataSnapshot.child(signUpEmail).exists()) {
+                    Toast.makeText(getApplicationContext(), "Account already exists with this email.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Toast 2");
+                    signUpProgressBar.setVisibility(View.INVISIBLE);
+                }
+
+                else if(signUpPassword.length() < 6) {
+                    Toast.makeText(getApplicationContext(), "Password should be at least 6 characters.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Toast 3");
+                    signUpProgressBar.setVisibility(View.INVISIBLE);
+
+                }
+
+                else {
+
+                    User newUser = new User(signUpEmail, signUpName, signUpPassword);
+                    tableUser.child(signUpEmail).setValue(newUser);
+                    Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
+
+                    Log.d(TAG, "DB Sign Up : OK");
+
+                    signUpUserInAuth(fullSignUpEmail, signUpPassword);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+    }
+
+    /*    signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -97,10 +215,8 @@ public class SignUp extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
-
-    }
 
 
     //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.
@@ -124,7 +240,7 @@ public class SignUp extends AppCompatActivity {
             return "";
         }
 
-        return formatted;
+        return formatted.toLowerCase();
 
     }
 }

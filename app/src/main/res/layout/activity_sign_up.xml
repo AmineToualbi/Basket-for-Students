@@ -55,6 +55,8 @@
         <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/passwordSignUp"
                 android:hint="Password"
+                app:met_minCharacters="6"
+                app:met_checkCharactersCountAtBeginning="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
