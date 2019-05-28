@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
@@ -19,6 +16,7 @@ import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import io.paperdb.Paper;
 
 public class SignIn extends AppCompatActivity {
 
@@ -26,6 +24,7 @@ public class SignIn extends AppCompatActivity {
     EditText passwordInput;
 
     Button btnSignIn;
+    CheckBox rememberMeCb;
 
     ProgressBar signInProgressBar;
 
@@ -47,6 +46,7 @@ public class SignIn extends AppCompatActivity {
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignIn);
 
         btnSignIn = (Button) findViewById(R.id.signInBtn);
+        rememberMeCb = (CheckBox) findViewById(R.id.rememberMeCb);
 
         signInProgressBar = (ProgressBar) findViewById(R.id.signInProgressBar);
         signInProgressBar.setVisibility(View.INVISIBLE);
@@ -55,6 +55,10 @@ public class SignIn extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         tableUser = database.getReference("Users");   //Get the table User created in the db.
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //Initialize Paper => library to use to save key-value pairs on phone storage = easier than SharedPreferences.
+        Paper.init(this);
+
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +98,12 @@ public class SignIn extends AppCompatActivity {
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
                     if (user.getPassword().equals(signInPassword)) {
+
+                        if(rememberMeCb.isChecked() == true) {      //Save email & password to remember.
+                            Paper.book().write(Common.USER_KEY, signInEmail);
+                            Paper.book().write(Common.PWD_KEY, signInPassword);
+                            Paper.book().write(Common.NAME_KEY, user.getName());
+                        }
 
                         Intent goToHome = new Intent(getApplicationContext(), Home.class);
                         Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.

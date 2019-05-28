@@ -30,6 +30,7 @@ import com.myapps.toualbiamine.food2class.Interface.ItemClickListener;
 import com.myapps.toualbiamine.food2class.Model.Restaurant;
 import com.myapps.toualbiamine.food2class.ViewHolder.MenuViewHolder;
 import com.squareup.picasso.Picasso;
+import io.paperdb.Paper;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,6 +58,9 @@ public class Home extends AppCompatActivity
         //Initialize Firebase
         database = FirebaseDatabase.getInstance();
         restaurant = database.getReference("Restaurants");
+
+        //Initialize Paper => library to use to save key-value pairs on phone storage = easier than SharedPreferences.
+        Paper.init(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -161,12 +165,18 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_cart) {
+
             Intent cart = new Intent(getApplicationContext(), Cart.class);
             startActivity(cart);
+
         } else if (id == R.id.nav_orders) {
+
             Intent orders = new Intent(getApplicationContext(), OrderStatus.class);
             startActivity(orders);
+
         } else if (id == R.id.nav_log_out) {
+
+            Paper.book().destroy();     //Destroy entire book of entries.
             FirebaseAuth.getInstance().signOut();
             Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
             //Flags to clean previous activity & avoid having previously entered credentials!
@@ -175,17 +185,22 @@ public class Home extends AppCompatActivity
                     Intent.FLAG_ACTIVITY_NEW_TASK);*/
             startActivity(mainActivity);
             finish();
+
         } else if (id == R.id.nav_share) {
+
             //TODO - Send link of app to ur friends!
 
         } else if (id == R.id.nav_support) {
+
             Intent support = new Intent(Intent.ACTION_SENDTO);
             support.setData(Uri.parse("mailto:"));
             support.putExtra(Intent.EXTRA_EMAIL, "amtoualbi@gmail.com");
             support.putExtra(Intent.EXTRA_SUBJECT, "[Food2Class] Support Request");
+
             if(support.resolveActivity(getPackageManager()) != null) {
                 startActivity(support);
             }
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -59,6 +59,15 @@
                 android:textAlignment="center"
         />
 
+        <CheckBox
+                android:id="@+id/rememberMeCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember Me"
+                android:textColor="@color/white"
+                android:buttonTint="@color/signIn"
+        />
+
 
     </LinearLayout>
 
@@ -76,7 +85,6 @@
             android:layout_margin="50dp"
     />
 
-    <
 
     <ProgressBar
             android:id="@+id/signInProgressBar"
@@ -88,5 +96,6 @@
             android:indeterminate="true"
             android:indeterminateTint="@color/signIn"
     />
+
 
 </RelativeLayout>

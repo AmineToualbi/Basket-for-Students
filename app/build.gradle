@@ -54,6 +54,10 @@ dependencies {
 
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
+    implementation 'io.paperdb:paperdb:2.6'
+    implementation 'com.github.rey5137:material:1.2.5'
+
+
 
 }
 

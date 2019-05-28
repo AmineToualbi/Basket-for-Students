@@ -49,6 +49,8 @@ public class OrderStatus extends AppCompatActivity {
 
         loadOrders(Common.currentUser.getEmail());
 
+        Log.d(TAG, "LoadOrders() from " + Common.currentUser.getEmail());
+
 
     }
 
