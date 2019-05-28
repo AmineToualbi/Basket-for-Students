@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.myapps.toualbiamine.food2class.Common.Common;
@@ -166,12 +167,13 @@ public class Home extends AppCompatActivity
             Intent orders = new Intent(getApplicationContext(), OrderStatus.class);
             startActivity(orders);
         } else if (id == R.id.nav_log_out) {
-            Intent signIn = new Intent(getApplicationContext(), SignIn.class);
+            FirebaseAuth.getInstance().signOut();
+            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
             //Flags to clean previous activity & avoid having previously entered credentials!
-            signIn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+           /* signIn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                     Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(signIn);
+                    Intent.FLAG_ACTIVITY_NEW_TASK);*/
+            startActivity(mainActivity);
             finish();
         } else if (id == R.id.nav_share) {
             //TODO - Send link of app to ur friends!

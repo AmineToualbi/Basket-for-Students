@@ -76,6 +76,8 @@
             android:layout_margin="50dp"
     />
 
+    <
+
     <ProgressBar
             android:id="@+id/signInProgressBar"
             style="?android:attr/progressBarStyle"

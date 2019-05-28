@@ -132,6 +132,7 @@ public class SignIn extends AppCompatActivity {
 
         if(TextUtils.isEmpty(signInEmail) || TextUtils.isEmpty(signInPassword)) {
             Toast.makeText(getApplicationContext(), "Please, enter all the fields.", Toast.LENGTH_SHORT).show();
+            signInProgressBar.setVisibility(View.INVISIBLE);
         }
 
         else {
