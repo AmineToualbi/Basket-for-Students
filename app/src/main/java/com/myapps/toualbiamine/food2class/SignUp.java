@@ -92,6 +92,8 @@ public class SignUp extends AppCompatActivity {
 
                        //     Toast.makeText(getApplicationContext(), "Verify your email to complete the creation of your account!", Toast.LENGTH_SHORT).show();
 
+                            Toast.makeText(getApplicationContext(), "Account created. Check your email!", Toast.LENGTH_SHORT).show();
+
                             sendVerificationEmail();
 
                         }
@@ -146,7 +148,6 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 //Check if wrong email format.
                 if(signUpEmail.equals("")) {
                     Toast.makeText(getApplicationContext(), "Wrong email format (firstlast@students.suu.edu)", Toast.LENGTH_SHORT).show();
@@ -173,7 +174,6 @@ public class SignUp extends AppCompatActivity {
 
                     User newUser = new User(signUpEmail, signUpName, signUpPassword);
                     tableUser.child(signUpEmail).setValue(newUser);
-                    Toast.makeText(getApplicationContext(), "Account created. Check your email!", Toast.LENGTH_SHORT).show();
 
                     Log.d(TAG, "DB Sign Up : OK");
 
