@@ -171,7 +171,7 @@ public class SignIn extends AppCompatActivity {
 
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
-                    if (user.getPassword().equals(signInPassword)) {
+                 //   if (user.getPassword().equals(signInPassword)) {
 
                         if(rememberMeCb.isChecked() == true) {      //Save email & password to remember.
                             Paper.book().write(Common.USER_KEY, signInEmail);
@@ -179,12 +179,17 @@ public class SignIn extends AppCompatActivity {
                             Paper.book().write(Common.NAME_KEY, user.getName());
                         }
 
+                        if(!(user.getPassword().equals(signInPassword))) {
+                            user.setPassword(signInPassword);
+                            tableUser.child(signInEmail).setValue(user);
+                        }
+
                         Intent goToHome = new Intent(getApplicationContext(), Home.class);
                         Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
                         startActivity(goToHome);
                         finish();
 
-                    } else {
+                    } /*else {
 
                         Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
 
@@ -195,7 +200,7 @@ public class SignIn extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "No account found for the email address!", Toast.LENGTH_SHORT).show();
 
-                }
+                }*/
 
             }
 
