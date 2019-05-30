@@ -1,7 +1,10 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +28,7 @@ public class SignIn extends AppCompatActivity {
 
     Button btnSignIn;
     CheckBox rememberMeCb;
+    TextView forgotPassword;
 
     ProgressBar signInProgressBar;
 
@@ -37,6 +41,12 @@ public class SignIn extends AppCompatActivity {
     String signInEmail;
     String signInPassword;
 
+    Dialog forgotPasswordPopup;
+    Button resetPassword;
+    ImageButton closePopupBtn;
+    EditText forgotPwdEmail;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +57,12 @@ public class SignIn extends AppCompatActivity {
 
         btnSignIn = (Button) findViewById(R.id.signInBtn);
         rememberMeCb = (CheckBox) findViewById(R.id.rememberMeCb);
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
 
         signInProgressBar = (ProgressBar) findViewById(R.id.signInProgressBar);
         signInProgressBar.setVisibility(View.INVISIBLE);
+
+        forgotPasswordPopup = new Dialog(this);
 
         //Initialize Firebase.
         database = FirebaseDatabase.getInstance();
@@ -72,6 +85,67 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showForgotPasswordPopup();
+
+            }
+        });
+
+
+    }
+
+    private void showForgotPasswordPopup() {
+
+        //Show the popup.
+        forgotPasswordPopup.setContentView(R.layout.popup_forgot_password);
+        forgotPasswordPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        forgotPasswordPopup.show();
+
+        resetPassword = (Button) forgotPasswordPopup.findViewById(R.id.resetBtn);
+        closePopupBtn = (ImageButton) forgotPasswordPopup.findViewById(R.id.closePopup);
+        forgotPwdEmail = (MaterialEditText) forgotPasswordPopup.findViewById(R.id.forgotEmailAddress);
+
+        closePopupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgotPasswordPopup.dismiss();
+            }
+        });
+
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String resetEmailAddress = forgotPwdEmail.getText().toString();
+
+                if(TextUtils.isEmpty(resetEmailAddress)) {
+                    Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    firebaseAuth.sendPasswordResetEmail(resetEmailAddress)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "Email sent!", Toast.LENGTH_SHORT).show();
+                                        Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(goToMain);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Failed to send reset password email.", Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                }
+                            });
+                }
+
+            }
+        });
 
     }
 

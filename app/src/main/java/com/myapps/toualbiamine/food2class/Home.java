@@ -45,6 +45,8 @@ public class Home extends AppCompatActivity
 
      FirebaseRecyclerAdapter<Restaurant, MenuViewHolder> adapter;
 
+     String TAG = "HomeActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,8 @@ public class Home extends AppCompatActivity
         toolbar.setTitle("Menu");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
+
+        Log.d(TAG, "Logged in as " + Common.currentUser.getEmail());
 
         //Initialize Firebase
         database = FirebaseDatabase.getInstance();

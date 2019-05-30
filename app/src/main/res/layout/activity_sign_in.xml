@@ -59,14 +59,35 @@
                 android:textAlignment="center"
         />
 
-        <CheckBox
-                android:id="@+id/rememberMeCb"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remember Me"
-                android:textColor="@color/white"
-                android:buttonTint="@color/signIn"
-        />
+                android:orientation="horizontal"
+                android:weightSum="2"
+        >
+
+            <CheckBox
+                    android:id="@+id/rememberMeCb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remember Me"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/signIn"
+                    android:layout_weight="1"
+            />
+
+            <TextView
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forgot Password?"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+            />
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
