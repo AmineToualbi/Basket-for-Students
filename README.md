@@ -1,4 +1,4 @@
-# Food2Go
+# Basket (name changed on July 17, 2019)
 
 Android app to order food from the different places on a school's campus from your phone. Currently in development. 
 
