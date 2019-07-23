@@ -2,6 +2,9 @@
 
 Android app to order food from the different places on a school's campus from your phone. Currently in development. 
 
+Current state: user application side (Android) completed at 98% and requests go through to Firebase. 
+To do: restaurant application side (Android) to start + iOS sides. 
+
 # Functionality
 Firebase real-time database storage for backend.
 
