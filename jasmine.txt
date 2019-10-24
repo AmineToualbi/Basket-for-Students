@@ -1,0 +1,12 @@
+issues
+
+git clone url
+git checkout -b jasmine/delete-cart
+git checkout jasmine/delete-cart
+git init
+git add .
+git commit -m "Delet Cart"
+git push -u origin jasmine/delete-cart
+
+git checkout master
+git rebase master
