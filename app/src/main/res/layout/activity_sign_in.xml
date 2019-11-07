@@ -70,11 +70,10 @@
                     android:id="@+id/rememberMeCb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remember Me"
-                    android:textColor="@color/white"
-                    android:buttonTint="@color/signIn"
                     android:layout_weight="1"
-            />
+                    android:buttonTint="@color/signIn"
+                    android:text="Remember Me"
+                    android:textColor="#6A1B9A" />
 
             <TextView
                     android:id="@+id/forgotPassword"
