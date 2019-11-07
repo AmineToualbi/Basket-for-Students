@@ -50,17 +50,19 @@
                     android:id="@+id/placeOrderBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/actionBarColor"
-                    android:textColor="@color/white"
-                    android:text="Place Order"
-                    android:shadowColor="@color/black"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_margin="8dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/circle_button"
 
-            />
+                    android:backgroundTint="@color/actionBarColor"
+                    android:shadowColor="@color/black"
+                    android:text="Parker's Place Order"
+                    android:textColor="@color/white" />
 
         </RelativeLayout>
 
