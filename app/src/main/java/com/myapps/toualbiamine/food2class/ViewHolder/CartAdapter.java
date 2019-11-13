@@ -88,13 +88,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         final int position = i;
 
         cartViewHolder.cartItemName.setText(listData.get(i).getmenuName());
-        cartViewHolder.deleteCartItemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(cartViewHolder.itemView.getContext(), "Clicked! " + position , Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//     //   cartViewHolder.deleteCartItemBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(cartViewHolder.itemView.getContext(), "Clicked! " + position , Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
     }
 
