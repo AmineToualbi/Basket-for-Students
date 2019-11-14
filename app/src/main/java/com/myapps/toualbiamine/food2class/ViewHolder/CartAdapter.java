@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.myapps.toualbiamine.food2class.Interface.ItemClickListener;
 import com.myapps.toualbiamine.food2class.Model.Order;
@@ -22,20 +24,28 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     public TextView cartItemName;
     public ImageView cartItemImgCount;
+    public ImageButton deleteCartItemBtn;
 
     private ItemClickListener itemClickListener;
 
-    public CartViewHolder(@NonNull View itemView) {
+    public CartViewHolder(@NonNull final View itemView) {
         super(itemView);
 
         cartItemName = (TextView) itemView.findViewById(R.id.cartItemName);
         cartItemImgCount = (ImageView) itemView.findViewById(R.id.cartItemImgCount);
+//        deleteCartItemBtn = (ImageButton) itemView.findViewById(R.id.deleteCartItemBtn);
+
+        /*deleteCartItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(itemView.getContext(), "Clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
     public void setCartItemName(TextView cartItemName) {
@@ -63,18 +73,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View itemView = inflater.inflate(R.layout.cart_layout, viewGroup, false);
+
         return new CartViewHolder(itemView);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final CartViewHolder cartViewHolder, int i) {
 
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(""+listData.get(i).getQuantity(), R.color.actionBarColor);
         cartViewHolder.cartItemImgCount.setImageDrawable(drawable);
 
+        final int position = i;
+
         cartViewHolder.cartItemName.setText(listData.get(i).getmenuName());
+//     //   cartViewHolder.deleteCartItemBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(cartViewHolder.itemView.getContext(), "Clicked! " + position , Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
     }
 
