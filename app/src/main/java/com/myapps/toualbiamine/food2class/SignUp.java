@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import org.libsodium.jni.NaCl;
+import org.libsodium.jni.Sodium;
 
 public class SignUp extends AppCompatActivity {
 
@@ -171,13 +173,15 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 else {
+                    //encrypt password before publishing it to the DB
+                    String encryptedPassword = hashPassword(signUpPassword);
 
-                    User newUser = new User(signUpEmail, signUpName, signUpPassword);
+                    User newUser = new User(signUpEmail, signUpName, encryptedPassword);
                     tableUser.child(signUpEmail).setValue(newUser);
 
                     Log.d(TAG, "DB Sign Up : OK");
 
-                    signUpUserInAuth(fullSignUpEmail, signUpPassword);
+                    signUpUserInAuth(fullSignUpEmail, encryptedPassword);
 
                 }
 
@@ -273,4 +277,19 @@ public class SignUp extends AppCompatActivity {
         return formatted.toLowerCase();
 
     }
+
+    //uses libsodium to hash a password and convert to String
+    private String hashPassword(String password){
+        byte[] hashedPass = new byte[NaCl.sodium().crypto_pwhash_strbytes()];
+        byte[] passBytes = password.getBytes();
+        NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_str(hashedPass,passBytes,passBytes.length,NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_opslimit_interactive(),NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_memlimit_interactive());
+        String s = "";
+        for(byte c:hashedPass){
+            s+=c+",";
+        }
+        return s;
+
+    }
 }
+
+

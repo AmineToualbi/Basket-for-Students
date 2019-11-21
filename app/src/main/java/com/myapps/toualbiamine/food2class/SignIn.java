@@ -19,6 +19,9 @@ import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import org.libsodium.jni.NaCl;
+
 import io.paperdb.Paper;
 
 public class SignIn extends AppCompatActivity {
@@ -159,7 +162,8 @@ public class SignIn extends AppCompatActivity {
 
                 //Data inputted by the user -> credentials.
                 signInEmail = convertToFirebaseFormat(emailInput.getText().toString());
-                signInPassword = passwordInput.getText().toString();
+                //password hashed the same way as signup, so plain text password is never passed to DB
+                signInPassword = hashPassword(passwordInput.getText().toString());
 
 
                 //Check if email inputted is .edu & user exists in db.
@@ -217,7 +221,7 @@ public class SignIn extends AppCompatActivity {
     private void loginUser() {
 
         signInEmail = emailInput.getText().toString();
-        signInPassword = passwordInput.getText().toString();
+        signInPassword = hashPassword(passwordInput.getText().toString());
 
         if(TextUtils.isEmpty(signInEmail) || TextUtils.isEmpty(signInPassword)) {
             Toast.makeText(getApplicationContext(), "Please, enter all the fields.", Toast.LENGTH_SHORT).show();
@@ -291,6 +295,19 @@ public class SignIn extends AppCompatActivity {
         }
 
         return formatted;
+
+    }
+
+    //used to hash password and convert to string
+    private String hashPassword(String password){
+        byte[] hashedPass = new byte[NaCl.sodium().crypto_pwhash_strbytes()];
+        byte[] passBytes = password.getBytes();
+        NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_str(hashedPass,passBytes,passBytes.length,NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_opslimit_interactive(),NaCl.sodium().crypto_pwhash_scryptsalsa208sha256_memlimit_interactive());
+        String s = "";
+        for(byte c:hashedPass){
+            s+=c+",";
+        }
+        return s;
 
     }
 }

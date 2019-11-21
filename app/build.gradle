@@ -57,6 +57,9 @@ dependencies {
     implementation 'io.paperdb:paperdb:2.6'
     implementation 'com.github.rey5137:material:1.2.5'
 
+    //libsodium is for password encryption
+    implementation 'com.github.joshjdevl.libsodiumjni:libsodium-jni-aar:2.0.1'
+
 
 
 }
