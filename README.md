@@ -15,6 +15,17 @@ Material Design features are used to provide a better UX. A CoordinatorLayout is
 
 Room & Dagger for SQLite. 
 
+# Team
+ 
+ Amine Toualbi
+ Akhil Anand 
+ Thomas Grant 
+ Parker Hannifin
+ Jasmine Mixson
+ Ben Landry Salomon
+ Abby Geddes
+ Siddharth Mehta
+ Trevor Graham
 
 
 # UI
