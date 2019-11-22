@@ -2,6 +2,12 @@
 
 Android app to order food from the different places on a school's campus from your phone. Currently in development. 
 
+# How To Run
+
+Download Android Studio, Java and run on emulator or physical device.
+
+To create an account you will need a @students.suu.edu email address
+
 # Functionality
 Firebase real-time database storage for backend.
 
