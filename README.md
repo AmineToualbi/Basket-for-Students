@@ -27,6 +27,7 @@ Room & Dagger for SQLite.
 ![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574463224-screenshot-20191121-171151.jpg)
 ![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574463235-screenshot-20191121-171255.jpg)
 ![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574463229-screenshot-20191121-171314.jpg)
+![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574463589-screenshot-20191122-155808.jpg)
 
 
 
