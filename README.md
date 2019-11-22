@@ -19,7 +19,7 @@ Room & Dagger for SQLite.
 
 # UI
 
-![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574462613-screenshot-20191121-171134.jpg)
+![alt text](https://image.noelshack.com/fichiers/2019/47/5/1574463085-screenshot-20191121-171134.jpg)
 ![alt text](http://image.noelshack.com/fichiers/2019/20/7/1558221574-food2go1.png)
 ![alt text](http://image.noelshack.com/fichiers/2019/20/7/1558238545-food2go2.png)
 ![alt text](http://image.noelshack.com/fichiers/2019/20/7/1558238548-food2go3.png)
