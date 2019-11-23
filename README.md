@@ -23,14 +23,22 @@ Room & Dagger for SQLite.
 
 # Team
  
- Amine Toualbi,
- Akhil Anand,
- Thomas Grant, 
- Parker Hannifin,
- Jasmine Mixson,
- Ben Landry Salomon,
- Abby Geddes,
- Siddharth Mehta,
+ Amine Toualbi
+ 
+ Akhil Anand
+ 
+ Thomas Grant
+ 
+ Parker Hannifin
+ 
+ Jasmine Mixson
+ 
+ Ben Landry Salomon
+ 
+ Abby Geddes
+ 
+ Siddharth Mehta
+ 
  Trevor Graham
 
 
