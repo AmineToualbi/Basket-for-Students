@@ -9,8 +9,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import com.myapps.toualbiamine.food2class.Model.Order;
+import com.myapps.toualbiamine.food2class.Providers.OrderProvider;
 import com.myapps.toualbiamine.food2class.R;
 import com.myapps.toualbiamine.food2class.ViewHolder.CartAdapter;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
@@ -19,7 +25,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     private ColorDrawable background;
 
     public SwipeToDeleteCallback(CartAdapter adapter) {
-        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);     //Only care about left & right swipe.
+        super(0, ItemTouchHelper.LEFT);     //Only care about left & right swipe.
         mAdapter = adapter;
         icon = ContextCompat.getDrawable(mAdapter.getContext(), R.drawable.ic_delete_black_24dp);
         background = new ColorDrawable(Color.RED);
