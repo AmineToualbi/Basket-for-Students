@@ -76,21 +76,15 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 signInProgressBar.setVisibility(View.VISIBLE);
-
                 loginUser();
-
-
             }
         });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showForgotPasswordPopup();
-
             }
         });
 
