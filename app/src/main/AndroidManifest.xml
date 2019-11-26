@@ -16,6 +16,8 @@
         </activity>
         <activity android:name=".Cart">
         </activity>
+        <activity android:name=".AboutUs">
+        </activity>
         <activity android:name=".FoodDetail">
         </activity>
         <activity android:name=".FoodList">

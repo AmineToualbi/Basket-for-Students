@@ -178,7 +178,15 @@ public class Home extends AppCompatActivity
             Intent orders = new Intent(getApplicationContext(), OrderStatus.class);
             startActivity(orders);
 
-        } else if (id == R.id.nav_log_out) {
+        }
+
+        else if (id == R.id.nav_aboutus){
+            Intent aboutus = new Intent (this , AboutUs.class);
+            startActivity(aboutus);
+        }
+
+
+        else if (id == R.id.nav_log_out) {
 
             Paper.book().destroy();     //Destroy entire book of entries.
             FirebaseAuth.getInstance().signOut();
