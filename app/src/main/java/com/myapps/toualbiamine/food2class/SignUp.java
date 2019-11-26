@@ -63,55 +63,39 @@ public class SignUp extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                 signUpEmail = convertToFirebaseFormat(emailInput.getText().toString());
-                 fullSignUpEmail = emailInput.getText().toString();
-                 signUpName  = nameInput.getText().toString();
-                 signUpPassword = passwordInput.getText().toString();
-                 Log.i(TAG, "Sign Up Email = " + signUpEmail);
-
-                 addUserToRealTimeDB();
-
+                signUpEmail = convertToFirebaseFormat(emailInput.getText().toString());
+                fullSignUpEmail = emailInput.getText().toString();
+                signUpName = nameInput.getText().toString();
+                signUpPassword = passwordInput.getText().toString();
+                Log.i(TAG, "Sign Up Email = " + signUpEmail);
+                addUserToRealTimeDB();
             }
         });
-
-
     }
 
-    private void signUpUserInAuth(String email, String password) {
 
+    private void signUpUserInAuth(String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
                         signUpProgressBar.setVisibility(View.INVISIBLE);
 
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Log.d(TAG, "Auth Sign Up : OK");
-
-                       //     Toast.makeText(getApplicationContext(), "Verify your email to complete the creation of your account!", Toast.LENGTH_SHORT).show();
-
                             Toast.makeText(getApplicationContext(), "Account created. Check your email!", Toast.LENGTH_SHORT).show();
-
                             sendVerificationEmail();
-
-                        }
-
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "Auth Sign Up : ERR " + task.getException().getMessage());
-
                         }
                     }
 
                 });
-
-
     }
 
-    private void sendVerificationEmail() {
 
+    private void sendVerificationEmail() {
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -136,61 +120,77 @@ public class SignUp extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
-    private void addUserToRealTimeDB() {
 
+    private void addUserToRealTimeDB() {
         signUpProgressBar.setVisibility(View.VISIBLE);
 
         //Get data in the DB once only. addValueEventListener listens to every data change.
         tableUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 //Check if wrong email format.
-                if(signUpEmail.equals("")) {
+                if (signUpEmail.equals("")) {
                     Toast.makeText(getApplicationContext(), "Wrong email format (firstlast@students.suu.edu)", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Toast 1");
                     signUpProgressBar.setVisibility(View.INVISIBLE);
-
                 }
 
                 //Check if user already exists.
-                else if(dataSnapshot.child(signUpEmail).exists()) {
+                else if (dataSnapshot.child(signUpEmail).exists()) {
                     Toast.makeText(getApplicationContext(), "Account already exists with this email.", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Toast 2");
                     signUpProgressBar.setVisibility(View.INVISIBLE);
                 }
 
-                else if(signUpPassword.length() < 6) {
+                //Check if password is long enough.
+                else if (signUpPassword.length() < 6) {
                     Toast.makeText(getApplicationContext(), "Password should be at least 6 characters.", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Toast 3");
                     signUpProgressBar.setVisibility(View.INVISIBLE);
-
                 }
 
+                //Everything is good => sign up the user.
                 else {
-
                     User newUser = new User(signUpEmail, signUpName, signUpPassword);
                     tableUser.child(signUpEmail).setValue(newUser);
-
                     Log.d(TAG, "DB Sign Up : OK");
-
                     signUpUserInAuth(fullSignUpEmail, signUpPassword);
-
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
-
         });
-
     }
+
+
+    //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.
+    private String convertToFirebaseFormat(String email) {
+        String formatted = "";
+        String domain = "";
+
+        //Faster to check from the end that going through the entire string.
+        for (int i = 0; i < email.length(); i++) {
+            char c = email.charAt(i);
+            if (c == '@') {
+                formatted = email.substring(0, i);
+                domain = email.substring(i + 1, email.length());
+                Log.i(TAG, "Domain = " + domain);
+                break;
+            }
+        }
+
+        if (!(domain.equals("students.suu.edu"))) {
+            return "";
+        }
+
+        return formatted.toLowerCase();
+    }
+
+}
 
     /*    signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,31 +246,3 @@ public class SignUp extends AppCompatActivity {
 
             }
         });*/
-
-
-
-    //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.
-     private String convertToFirebaseFormat(String email) {
-
-        String formatted = "";
-        String domain = "";
-
-        //Faster to check from the end that going through the entire string.
-        for(int i=0; i<email.length(); i++) {
-            char c = email.charAt(i);
-            if(c == '@') {
-                formatted = email.substring(0, i);
-                domain = email.substring(i+1, email.length());
-                Log.i(TAG, "Domain = " + domain);
-                break;
-            }
-        }
-
-        if(!(domain.equals("students.suu.edu"))) {
-            return "";
-        }
-
-        return formatted.toLowerCase();
-
-    }
-}
