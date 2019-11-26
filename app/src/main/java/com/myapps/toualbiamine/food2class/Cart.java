@@ -141,20 +141,18 @@ public class Cart extends AppCompatActivity {
 
     }
 
-    private void loadCart() {
-
+    public void loadCart() {
         cart = orderProvider.getAll();
         adapter = new CartAdapter(cart, this);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
 
-        int swipePrice = 0;
-        for(Order order : cart) {
-            swipePrice += Integer.parseInt(order.getQuantity());
-        }
-
-        mealSwipeTotal.setText(swipePrice + " Meal Swipe(s)");
-
+//        int swipePrice = 0;
+//        for(Order order : cart) {
+//            swipePrice += Integer.parseInt(order.getQuantity());
+//        }
+//
+//        mealSwipeTotal.setText(swipePrice + " Meal Swipe(s)");
     }
 }

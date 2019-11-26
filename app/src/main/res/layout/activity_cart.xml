@@ -35,7 +35,7 @@
                         android:id="@+id/mealSwipeTotal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3 Meal Swipes"
+                        android:text="0 Meal Swipe"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textAlignment="center"
