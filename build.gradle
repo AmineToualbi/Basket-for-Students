@@ -5,6 +5,8 @@ buildscript {
     repositories {
         google()
         jcenter()
+        //mavenCentral needed for libsodium for password encryption
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
