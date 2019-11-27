@@ -1,6 +1,7 @@
 package com.myapps.toualbiamine.food2class.Model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "Orders")
@@ -10,6 +11,7 @@ public class Order {
     public String menuID;       //If private => weird bug w Room.
     public String menuName;
     String quantity;
+
 
     public Order() {
 

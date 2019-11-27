@@ -40,6 +40,9 @@ public class SignUp extends AppCompatActivity {
     String signUpPassword;
     String signUpName;
 
+    private boolean isStaff = false;
+    private int flagCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,7 +175,7 @@ public class SignUp extends AppCompatActivity {
 
                 else {
 
-                    User newUser = new User(signUpEmail, signUpName, signUpPassword);
+                    User newUser = new User(signUpEmail, signUpName, signUpPassword, isStaff, flagCount);
                     tableUser.child(signUpEmail).setValue(newUser);
 
                     Log.d(TAG, "DB Sign Up : OK");

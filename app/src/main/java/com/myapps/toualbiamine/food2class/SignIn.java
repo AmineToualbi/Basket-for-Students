@@ -160,7 +160,7 @@ public class SignIn extends AppCompatActivity {
                 //Data inputted by the user -> credentials.
                 signInEmail = convertToFirebaseFormat(emailInput.getText().toString());
                 signInPassword = passwordInput.getText().toString();
-
+                int flagCount;
 
                 //Check if email inputted is .edu & user exists in db.
                 if(!(signInEmail.equals("")) && dataSnapshot.child(signInEmail).exists()) {
@@ -168,18 +168,24 @@ public class SignIn extends AppCompatActivity {
                     //Get User information.
                     User user = dataSnapshot.child(signInEmail).getValue(User.class);
                     user.setEmail(signInEmail);
+                    flagCount = user.getFlagCount();
+
 
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
                  //   if (user.getPassword().equals(signInPassword)) {
 
-                        if(rememberMeCb.isChecked() == true) {      //Save email & password to remember.
+
+
+                    if (flagCount < 3) {
+
+                        if (rememberMeCb.isChecked() == true) {      //Save email & password to remember.
                             Paper.book().write(Common.USER_KEY, signInEmail);
                             Paper.book().write(Common.PWD_KEY, signInPassword);
                             Paper.book().write(Common.NAME_KEY, user.getName());
                         }
 
-                        if(!(user.getPassword().equals(signInPassword))) {
+                        if (!(user.getPassword().equals(signInPassword))) {
                             user.setPassword(signInPassword);
                             tableUser.child(signInEmail).setValue(user);
                         }
@@ -188,6 +194,14 @@ public class SignIn extends AppCompatActivity {
                         Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
                         startActivity(goToHome);
                         finish();
+                    }
+                    else  {
+                        firebaseAuth.signOut();
+                        Toast.makeText(getApplicationContext(), "Sorry your account is blocked. Please contact customer service", Toast.LENGTH_LONG).show();
+                        Intent goToMainActivity = new Intent (getApplicationContext(),MainActivity.class);
+                        startActivity(goToMainActivity);
+                        finish();
+                    }
 
                     } /*else {
 
