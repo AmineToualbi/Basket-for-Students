@@ -23,12 +23,6 @@
                 android:iconTint="@color/white"
         />
         <item
-            android:id="@+id/nav_aboutus"
-            android:icon="@drawable/ic_aboutus_people_black_24dp"
-            android:title="About Us"
-            android:iconTint="@color/white"
-            />
-        <item
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="Sign Out"
@@ -41,7 +35,12 @@
     <item android:title="">
 
         <menu>
-
+            <item
+                android:id="@+id/nav_aboutus"
+                android:icon="@drawable/ic_aboutus_people_black_24dp"
+                android:title="About Us"
+                android:iconTint="@color/white"
+            />
             <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
