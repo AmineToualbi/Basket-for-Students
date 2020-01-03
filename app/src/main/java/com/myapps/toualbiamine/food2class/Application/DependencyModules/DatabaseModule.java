@@ -15,18 +15,15 @@ public class DatabaseModule {
     @Provides
     @Singleton
     public AppDatabase appDatabase(Context context) {
-
         return Room.databaseBuilder(context, AppDatabase.class, "OrdersDB.db")
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
-
     }
 
     @Provides
     public OrderDao orderDao(AppDatabase database) {
         return database.orderDao();
     }
-
 
 }

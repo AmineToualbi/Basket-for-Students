@@ -90,14 +90,13 @@ public class FoodDetail extends AppCompatActivity {
         cartFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Log.d(TAG, "Order - " + foodID + " " + currentFood.getName() + " " + quantityBtn.getNumber());
 
                 Order newOrder = new Order(Common.orderID, foodID, currentFood.getName(),
                         quantityBtn.getNumber());
 
                 Common.orderID++;
-                Log.d(TAG, "newOrder.foodID = " + newOrder.getmenuID());
+                Log.d(TAG, "newOrder.foodID = " + newOrder.getMenuID());
 
                 orderProvider.save(newOrder);
 
@@ -124,18 +123,17 @@ public class FoodDetail extends AppCompatActivity {
                     }
                     Log.d(TAG, jsonData);
                 }
-
             }
         });
-
     }
+
 
     private void showMessage(String msg) {
         new AlertDialog.Builder(getApplicationContext()).setMessage(msg).create().show();
     }
 
-    private void showFoodDetail (String foodID) {
 
+    private void showFoodDetail (String foodID) {
         //foodID -> passed from Intent when user clicks on a specific choice from menu. Returns 01, 02, 03...
         //Get the table of data assigned to this ID -> returns description, image, name, restaurantID.
         DatabaseReference foodIDTable = foods.child(foodID);
@@ -143,25 +141,18 @@ public class FoodDetail extends AppCompatActivity {
         foodIDTable.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 currentFood = dataSnapshot.getValue(Food.class);
-
                 Picasso.with(getBaseContext()).load(currentFood.getImage())
-                .into(foodImage);
-
+                        .into(foodImage);
                 collapsingToolbarLayout.setTitle(currentFood.getName());
-
                 foodDescription.setText(currentFood.getDescription());
-
                 foodName.setText(currentFood.getName());
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
     }
+
 }

@@ -7,10 +7,8 @@ import java.util.List;
 public interface IOrderProvider {
 
     public List<Order> getAll();
-
     public void save(Order order);
-
     public void update(Order order);
-
     public void delete(Order order);
+
 }

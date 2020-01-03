@@ -72,7 +72,6 @@ public class SignIn extends AppCompatActivity {
         //Initialize Paper => library to use to save key-value pairs on phone storage = easier than SharedPreferences.
         Paper.init(this);
 
-
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,12 +86,10 @@ public class SignIn extends AppCompatActivity {
                 showForgotPasswordPopup();
             }
         });
-
-
     }
 
-    private void showForgotPasswordPopup() {
 
+    private void showForgotPasswordPopup() {
         //Show the popup.
         forgotPasswordPopup.setContentView(R.layout.popup_forgot_password);
         forgotPasswordPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -112,13 +109,11 @@ public class SignIn extends AppCompatActivity {
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String resetEmailAddress = forgotPwdEmail.getText().toString();
 
-                if(TextUtils.isEmpty(resetEmailAddress)) {
+                if (TextUtils.isEmpty(resetEmailAddress)) {
                     Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     firebaseAuth.sendPasswordResetEmail(resetEmailAddress)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -137,27 +132,22 @@ public class SignIn extends AppCompatActivity {
                                 }
                             });
                 }
-
             }
         });
-
     }
 
+
     private void getUserInfoFromDB() {
-
-
         //Get the data by querying the database.
         tableUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 //Data inputted by the user -> credentials.
                 signInEmail = convertToFirebaseFormat(emailInput.getText().toString());
                 signInPassword = passwordInput.getText().toString();
 
-
                 //Check if email inputted is .edu & user exists in db.
-                if(!(signInEmail.equals("")) && dataSnapshot.child(signInEmail).exists()) {
+                if (!(signInEmail.equals("")) && dataSnapshot.child(signInEmail).exists()) {
 
                     //Get User information.
                     User user = dataSnapshot.child(signInEmail).getValue(User.class);
@@ -165,74 +155,52 @@ public class SignIn extends AppCompatActivity {
 
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
-                 //   if (user.getPassword().equals(signInPassword)) {
-
-                        if(rememberMeCb.isChecked() == true) {      //Save email & password to remember.
-                            Paper.book().write(Common.USER_KEY, signInEmail);
-                            Paper.book().write(Common.PWD_KEY, signInPassword);
-                            Paper.book().write(Common.NAME_KEY, user.getName());
-                        }
-
-                        if(!(user.getPassword().equals(signInPassword))) {
-                            user.setPassword(signInPassword);
-                            tableUser.child(signInEmail).setValue(user);
-                        }
-
-                        Intent goToHome = new Intent(getApplicationContext(), Home.class);
-                        Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
-                        startActivity(goToHome);
-                        finish();
-
-                    } /*else {
-
-                        Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
-
+                    if (rememberMeCb.isChecked() == true) {      //Save email & password to remember.
+                        Paper.book().write(Common.USER_KEY, signInEmail);
+                        Paper.book().write(Common.PWD_KEY, signInPassword);
+                        Paper.book().write(Common.NAME_KEY, user.getName());
                     }
 
+                    if (!(user.getPassword().equals(signInPassword))) {
+                        user.setPassword(signInPassword);
+                        tableUser.child(signInEmail).setValue(user);
+                    }
+
+                    Intent goToHome = new Intent(getApplicationContext(), Home.class);
+                    Common.currentUser = user;      //Let the app know that the current user is the that we just signed in.
+                    startActivity(goToHome);
+                    finish();
+
                 }
-                else {
-
-                    Toast.makeText(getApplicationContext(), "No account found for the email address!", Toast.LENGTH_SHORT).show();
-
-                }*/
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-
-
     }
 
 
     private void loginUser() {
-
         signInEmail = emailInput.getText().toString();
         signInPassword = passwordInput.getText().toString();
 
-        if(TextUtils.isEmpty(signInEmail) || TextUtils.isEmpty(signInPassword)) {
+        if (TextUtils.isEmpty(signInEmail) || TextUtils.isEmpty(signInPassword)) {
             Toast.makeText(getApplicationContext(), "Please, enter all the fields.", Toast.LENGTH_SHORT).show();
             signInProgressBar.setVisibility(View.INVISIBLE);
         }
-
         else {
-
             firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                     Log.d(TAG, "FirebaseAuth : OK");
 
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
-                    if(!task.isSuccessful()) {
-                        if(task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                    if (!task.isSuccessful()) {
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
                         }
-                        else if(task.getException() instanceof FirebaseAuthInvalidUserException) {
+                        else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             Toast.makeText(getApplicationContext(), "No account found for the email address!", Toast.LENGTH_SHORT).show();
                         }
                         else {
@@ -242,49 +210,44 @@ public class SignIn extends AppCompatActivity {
                     else {
                         checkIfEmailVerified();
                     }
-
                 }
             });
-
         }
-
     }
 
-    private void checkIfEmailVerified() {
 
+    private void checkIfEmailVerified() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        if(user.isEmailVerified() == true) {
+        if (user.isEmailVerified() == true) {
             getUserInfoFromDB();
-        }
-        else {
+        } else {
             firebaseAuth.signOut();
             Toast.makeText(getApplicationContext(), "Verify your email!", Toast.LENGTH_SHORT).show();
         }
-
     }
+
 
     //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.
     private String convertToFirebaseFormat(String email) {
-
         String formatted = "";
         String domain = "";
 
         //Faster to check from the end that going through the entire string.
-        for(int i=0; i<email.length(); i++) {
+        for (int i = 0; i < email.length(); i++) {
             char c = email.charAt(i);
-            if(c == '@') {
+            if (c == '@') {
                 formatted = email.substring(0, i);
-                domain = email.substring(i+1, email.length());
+                domain = email.substring(i + 1, email.length());
                 break;
             }
         }
 
-        if(!(domain.equals("students.suu.edu"))) {
+        if (!(domain.equals("students.suu.edu"))) {
             return "";
         }
 
         return formatted;
-
     }
+
 }

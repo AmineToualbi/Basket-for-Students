@@ -11,3 +11,4 @@ public abstract class ProviderModule {
     @Binds      //Binds abstract classes & modules.
     public abstract IOrderProvider binOrderProvider(OrderProvider implementation);
 }
+

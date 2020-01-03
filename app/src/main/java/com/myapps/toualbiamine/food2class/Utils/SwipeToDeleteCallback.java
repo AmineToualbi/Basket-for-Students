@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+//Utility class to handle the swipe functionality to delete items in carts.
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
     private CartAdapter mAdapter;
@@ -43,7 +44,8 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                            @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         View itemView = viewHolder.itemView;
         int backgroundCornerOffset = 20;        //Allows to push background behind edge of parent view.
@@ -72,7 +74,9 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
         else {                  //View is unswiped.
             background.setBounds(0, 0, 0, 0);
         }
+
         background.draw(c);
         icon.draw(c);
     }
+
 }

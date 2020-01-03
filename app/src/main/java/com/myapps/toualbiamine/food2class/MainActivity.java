@@ -45,29 +45,21 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
-
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent goToSignUp = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(goToSignUp);
-
             }
         });
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent goToSignIn = new Intent(getApplicationContext(), SignIn.class);
                 startActivity(goToSignIn);
-
             }
         });
-
-
-
     }
+
 }

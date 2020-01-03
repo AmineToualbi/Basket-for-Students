@@ -58,7 +58,6 @@ public class FoodList extends AppCompatActivity {
         if(!(restaurantID.isEmpty()) && restaurantID != null) {
             loadFoodList(restaurantID);
         }
-
     }
 
     //Added this part to the rules in Firebase for faster & safer access to data.
@@ -67,7 +66,6 @@ public class FoodList extends AppCompatActivity {
     //      }
     //Use FirebaseUI if you have RecyclerView w ViewHolder to populate it easily!
     private void loadFoodList(String restaurantID) {
-
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item, FoodViewHolder.class,
                 //orderByChild -> returns Query where child nodes are ordered by restaurantIDs.
@@ -76,7 +74,6 @@ public class FoodList extends AppCompatActivity {
         {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, Food model, int position) {
-
                 viewHolder.foodName.setText(model.getName());
 
                 Picasso.with(getBaseContext()).load(model.getImage())
@@ -87,21 +84,18 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-
                         Intent foodDetail = new Intent(getApplicationContext(), FoodDetail.class);
                         //Send FoodID to new page = menuID.
                         foodDetail.putExtra("FoodID", adapter.getRef(position).getKey());
                         startActivity(foodDetail);
-
                     }
                 });
-
             }
         };
 
         //Set adapter
         Log.d(TAG, "Adapter - " + adapter.getItemCount());
         recyclerView.setAdapter(adapter);
-
     }
+
 }

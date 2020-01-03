@@ -21,5 +21,4 @@ public interface OrderDao {     //Data Access Object.
     @Delete
     public void delete(Order order);
 
-
 }

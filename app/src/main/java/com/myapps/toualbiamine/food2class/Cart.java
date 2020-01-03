@@ -74,25 +74,19 @@ public class Cart extends AppCompatActivity {
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 cartData = orderProvider.getAll();
-
                 if(cartData.isEmpty() == false) {
                     showDietaryRestrictionPopup(cartData);
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Your cart is empty.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
-
     }
 
-    private void placeOrder(List<Order> cartData, String restriction) {
 
+    private void placeOrder(List<Order> cartData, String restriction) {
         Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(),
                 restriction, cartData);
 
@@ -104,13 +98,11 @@ public class Cart extends AppCompatActivity {
         }
 
         loadCart();
-
         Toast.makeText(getApplicationContext(), "Order submitted!", Toast.LENGTH_SHORT).show();
-
     }
 
-    private void showDietaryRestrictionPopup(final List<Order> cartData) {
 
+    private void showDietaryRestrictionPopup(final List<Order> cartData) {
         //Show the popup.
         dietaryRestrictionPopup.setContentView(R.layout.popup_place_order_msg);
         dietaryRestrictionPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -130,16 +122,13 @@ public class Cart extends AppCompatActivity {
         placeOrderPopupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String restriction = restrictionEditText.getText().toString();
                 placeOrder(cartData, restriction);
                 dietaryRestrictionPopup.dismiss();
-
             }
         });
-
-
     }
+
 
     public void loadCart() {
         cart = orderProvider.getAll();
@@ -147,12 +136,6 @@ public class Cart extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
-
-//        int swipePrice = 0;
-//        for(Order order : cart) {
-//            swipePrice += Integer.parseInt(order.getQuantity());
-//        }
-//
-//        mealSwipeTotal.setText(swipePrice + " Meal Swipe(s)");
     }
+
 }

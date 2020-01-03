@@ -6,16 +6,16 @@ import android.widget.TextView;
 
 public class AboutUs extends AppCompatActivity {
 
-    public TextView team;
+    public TextView teamNames;
+    public TextView description;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
-        TextView textview_aboutus = findViewById(R.id.abouttextview);
-        textview_aboutus.setText("Food2Class is an online food ordering app which enables users to order food anywhere on campus");
-        TextView team = findViewById(R.id.team);
-        team.setText("Amine Toualbi \nAkhil Anand \nThomas Grant \nParker Hannifin \nJasmine Mixson \nBen Landry Salomon \nAbby Geddes \nSiddharth Mehta \nTrevor Graham");
-
-
+        description = findViewById(R.id.aboutUsDescription);
+        description.setText("Food2Class is an online food ordering app which enables users to order food anywhere on campus");
+        teamNames = findViewById(R.id.aboutUsTeamNames);
+        teamNames.setText("Amine Toualbi \nAkhil Anand \nThomas Grant \nParker Hannifin \nJasmine Mixson \nBen Landry Salomon \nAbby Geddes \nSiddharth Mehta \nTrevor Graham");
     }
 
 }

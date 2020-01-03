@@ -7,14 +7,10 @@ public class DatabaseApp extends Application {
 
     public static DatabaseAppComponent component;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
-
         ContextModule contextModule = new ContextModule(getApplicationContext());
-
-
 
         component = DaggerDatabaseAppComponent
                 .builder()
@@ -23,4 +19,5 @@ public class DatabaseApp extends Application {
                 )
                 .build();
     }
+
 }
