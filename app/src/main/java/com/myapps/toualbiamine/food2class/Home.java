@@ -86,7 +86,6 @@ public class Home extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //Set name for user.
         View headerView = navigationView.getHeaderView(0);
         userName = (TextView) headerView.findViewById(R.id.userName);       //Need the headerView here to avoid crash!
@@ -100,18 +99,15 @@ public class Home extends AppCompatActivity
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
-
     }
 
     //FirebaseUI -> https://firebaseopensource.com/projects/firebase/firebaseui-android/database/readme.md/
     private void loadMenu() {
-
          adapter = new FirebaseRecyclerAdapter<Restaurant, MenuViewHolder>(Restaurant.class,
                 R.layout.menu_item, MenuViewHolder.class, restaurant) {
 
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Restaurant model, int position) {
-
                 viewHolder.menuName.setText(model.getName());
 
                 Picasso.with(getBaseContext()).load(model.getImage())
@@ -133,7 +129,6 @@ public class Home extends AppCompatActivity
         };
 
         recycler_menu.setAdapter(adapter);
-
     }
 
     @Override
@@ -155,8 +150,6 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -166,18 +159,16 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_menu) {
+        if (id == R.id.nav_menu) { }
 
-        } else if (id == R.id.nav_cart) {
-
+        else if (id == R.id.nav_cart) {
             Intent cart = new Intent(getApplicationContext(), Cart.class);
             startActivity(cart);
+        }
 
-        } else if (id == R.id.nav_orders) {
-
+        else if (id == R.id.nav_orders) {
             Intent orders = new Intent(getApplicationContext(), OrderStatus.class);
             startActivity(orders);
-
         }
 
         else if (id == R.id.nav_aboutus){
@@ -185,9 +176,7 @@ public class Home extends AppCompatActivity
             startActivity(aboutus);
         }
 
-
         else if (id == R.id.nav_log_out) {
-
             Paper.book().destroy();     //Destroy entire book of entries.
             FirebaseAuth.getInstance().signOut();
             Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
@@ -197,13 +186,13 @@ public class Home extends AppCompatActivity
                     Intent.FLAG_ACTIVITY_NEW_TASK);*/
             startActivity(mainActivity);
             finish();
+        }
 
-        } else if (id == R.id.nav_share) {
-
+        else if (id == R.id.nav_share) {
             //TODO - Send link of app to ur friends!
+        }
 
-        } else if (id == R.id.nav_support) {
-
+        else if (id == R.id.nav_support) {
             Intent support = new Intent(Intent.ACTION_SENDTO);
             support.setData(Uri.parse("mailto:"));
             support.putExtra(Intent.EXTRA_EMAIL, "amtoualbi@gmail.com");
@@ -212,7 +201,6 @@ public class Home extends AppCompatActivity
             if(support.resolveActivity(getPackageManager()) != null) {
                 startActivity(support);
             }
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

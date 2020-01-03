@@ -24,13 +24,10 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
-
         orderID = (TextView) itemView.findViewById(R.id.orderID);
         orderStatus = (TextView) itemView.findViewById(R.id.orderStatus);
         orderMenu = (TextView) itemView.findViewById(R.id.orderMenu);
-
         itemView.setOnClickListener(this);
-
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -41,6 +38,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void onClick(View v) {
     //No onClick => otherwise it throws an error.
        //itemClickListener.onClick(v, getAdapterPosition(), false);
-
     }
+
 }

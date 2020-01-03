@@ -29,18 +29,17 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     public CartViewHolder(@NonNull final View itemView) {
         super(itemView);
-
         cartItemName = (TextView) itemView.findViewById(R.id.cartItemName);
         cartItemImgCount = (ImageView) itemView.findViewById(R.id.cartItemImgCount);
     }
 
     @Override
-    public void onClick(View v) {
-    }
+    public void onClick(View v) { }
 
     public void setCartItemName(TextView cartItemName) {
         this.cartItemName = cartItemName;
     }
+
 }
 
 
@@ -78,7 +77,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(""+listData.get(i).getQuantity(), R.color.actionBarColor);
         cartViewHolder.cartItemImgCount.setImageDrawable(drawable);
-        cartViewHolder.cartItemName.setText(listData.get(i).getmenuName());
+        cartViewHolder.cartItemName.setText(listData.get(i).getMenuName());
         mealSwipePriceTextView.setText(getSwipePrice() + " Meal Swipe(s)");
     }
 
