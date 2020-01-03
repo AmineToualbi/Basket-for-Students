@@ -57,8 +57,6 @@ dependencies {
     implementation 'io.paperdb:paperdb:2.6'
     implementation 'com.github.rey5137:material:1.2.5'
 
-
-
 }
 
 apply plugin: 'com.google.gms.google-services'

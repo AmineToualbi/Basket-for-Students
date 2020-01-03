@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:openDrawer="start"
-        android:background="@drawable/foodtogo_bg_smallpng">
+        android:background="@color/grayblack"
+        >
 
     <include
             layout="@layout/app_bar_home"
