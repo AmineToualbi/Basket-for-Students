@@ -2,6 +2,7 @@ package com.myapps.toualbiamine.food2class;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -52,10 +53,13 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
+
 
         Log.d(TAG, "Logged in as " + Common.currentUser.getEmail());
 
@@ -89,6 +93,10 @@ public class Home extends AppCompatActivity
         //Set name for user.
         View headerView = navigationView.getHeaderView(0);
         userName = (TextView) headerView.findViewById(R.id.userName);       //Need the headerView here to avoid crash!
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
+        userName.setTypeface(font);
+
         if(Common.currentUser!=null)
             userName.setText(Common.currentUser.getName());
 

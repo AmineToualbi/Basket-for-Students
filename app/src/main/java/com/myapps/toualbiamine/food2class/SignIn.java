@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -51,16 +52,31 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
+
 
         emailInput = (MaterialEditText) findViewById(R.id.emailSignIn);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignIn);
 
+        emailInput.setTypeface(font); //set emailInput font
+        passwordInput.setTypeface(font); //set passwordInput font
+
         btnSignIn = (Button) findViewById(R.id.signInBtn);
         rememberMeCb = (CheckBox) findViewById(R.id.rememberMeCb);
+
+        rememberMeCb.setTypeface(font); //set rememberMeCb font
+
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+
+
+
+        forgotPassword.setTypeface(font); //set forgotpassword font
+        btnSignIn.setTypeface(font); //set signin font
+        rememberMeCb.setTypeface(font);
 
         signInProgressBar = (ProgressBar) findViewById(R.id.signInProgressBar);
         signInProgressBar.setVisibility(View.INVISIBLE);
+
 
         forgotPasswordPopup = new Dialog(this);
 

@@ -1,5 +1,6 @@
 package com.myapps.toualbiamine.food2class.ViewHolder;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,6 +28,11 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         foodName = (TextView) itemView.findViewById(R.id.foodName);
         foodImage = (ImageView) itemView.findViewById(R.id.foodImage);
         itemView.setOnClickListener(this);
+
+        Typeface font = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/restaurant_font.otf");
+        foodName.setTypeface(font);
+
+
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
