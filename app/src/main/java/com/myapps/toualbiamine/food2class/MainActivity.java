@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn = (Button) findViewById(R.id.btnSignUp);
         appSlogan = (TextView) findViewById(R.id.slogan);
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/nabila.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
         appSlogan.setTypeface(font);        //Change fonts of slogan in main screen.
+        signInBtn.setTypeface(font);
+        signUpBtn.setTypeface(font);
 
         //Initialize Paper => library to use to save key-value pairs on phone storage = easier than SharedPreferences.
         Paper.init(this);

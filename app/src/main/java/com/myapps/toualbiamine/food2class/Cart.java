@@ -2,6 +2,7 @@ package com.myapps.toualbiamine.food2class;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +54,9 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
+
+
         //Initialize Firebase.
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Requests");
@@ -68,6 +72,10 @@ public class Cart extends AppCompatActivity {
 
         mealSwipeTotal = (TextView) findViewById(R.id.mealSwipeTotal);
         placeOrderBtn = (Button) findViewById(R.id.placeOrderBtn);
+
+        mealSwipeTotal.setTypeface(font);
+        placeOrderBtn.setTypeface(font);
+
 
         loadCart();
 

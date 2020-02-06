@@ -1,6 +1,7 @@
 package com.myapps.toualbiamine.food2class;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,14 +46,24 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
+
+
         emailInput = (MaterialEditText) findViewById(R.id.emailSignUp);
         nameInput = (MaterialEditText) findViewById(R.id.nameSignUp);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignUp);
+
 
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
 
         signUpProgressBar = (ProgressBar) findViewById(R.id.signUpProgressBar);
         signUpProgressBar.setVisibility(View.INVISIBLE);
+
+        emailInput.setTypeface(font);
+        nameInput.setTypeface(font);
+        passwordInput.setTypeface(font);
+        signUpBtn.setTypeface(font);
+
 
         //Initialize Firebase.
         database = FirebaseDatabase.getInstance();

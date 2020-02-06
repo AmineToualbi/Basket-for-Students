@@ -2,6 +2,7 @@ package com.myapps.toualbiamine.food2class.ViewHolder;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,9 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         super(itemView);
         cartItemName = (TextView) itemView.findViewById(R.id.cartItemName);
         cartItemImgCount = (ImageView) itemView.findViewById(R.id.cartItemImgCount);
+
+        Typeface font = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/restaurant_font.otf");
+        cartItemName.setTypeface(font);
     }
 
     @Override
@@ -62,6 +66,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         mealSwipePriceTextView = (TextView) ((Activity)context).findViewById(R.id.mealSwipeTotal);
         DatabaseApp.component.injectCartAdapter(this);
         cartData = orderProvider.getAll();
+
+
+
     }
 
     @NonNull
