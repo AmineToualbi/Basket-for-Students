@@ -58,9 +58,6 @@ public class SignIn extends AppCompatActivity {
         emailInput = (MaterialEditText) findViewById(R.id.emailSignIn);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignIn);
 
-        emailInput.setTypeface(font); //set emailInput font
-        passwordInput.setTypeface(font); //set passwordInput font
-
         btnSignIn = (Button) findViewById(R.id.signInBtn);
         rememberMeCb = (CheckBox) findViewById(R.id.rememberMeCb);
 
