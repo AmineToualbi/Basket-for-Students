@@ -9,15 +9,17 @@ public class Request {
     private List<Order> order;
     private String restriction;
     private String status;
+    private String restaurantID;
 
     public Request() { }
 
-    public Request(String email, String name, String restriction, List<Order> order) {
+    public Request(String email, String name, String restriction, List<Order> order, String restaurantID) {
         this.email = email;
         this.name = name;
         this.restriction = restriction;
         this.order = order;
         this.status = "0";          //0: Placed. 1: Ready. 2: Picked up.
+        this.restaurantID = restaurantID;
     }
 
     public String getStatus() {
@@ -51,5 +53,7 @@ public class Request {
     public void setOrder(List<Order> order) {
         this.order = order;
     }
+    public void setRestaurantID(String restaurantID) { this.restaurantID = restaurantID; }
+    public String getRestaurantID() { return restaurantID; }
 
 }

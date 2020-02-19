@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +25,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Cart extends AppCompatActivity {
@@ -76,8 +78,8 @@ public class Cart extends AppCompatActivity {
         mealSwipeTotal.setTypeface(font);
         placeOrderBtn.setTypeface(font);
 
-
         loadCart();
+
 
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +95,40 @@ public class Cart extends AppCompatActivity {
         });
     }
 
+    private HashMap<String, List<Order>> filterOrdersByRestaurant(List<Order> cartData) {
+        HashMap<String, List<Order>> orderRestaurantMap = new HashMap<>();
+
+        for(Order order : cartData) {
+            String restaurantID = order.getRestaurantID();
+            if(orderRestaurantMap.containsKey(restaurantID)) {
+                List<Order> orders = orderRestaurantMap.get(restaurantID);
+                orders.add(order);
+                orderRestaurantMap.put(restaurantID, orders);
+            }
+            else {
+                List<Order> orders = new ArrayList<>();
+                orders.add(order);
+                orderRestaurantMap.put(restaurantID, orders);
+            }
+        }
+        return orderRestaurantMap;
+    }
 
     private void placeOrder(List<Order> cartData, String restriction) {
-        Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(),
-                restriction, cartData);
+        HashMap<String, List<Order>> ordersByRestaurants = filterOrdersByRestaurant(cartData);
+
+        //We create a new Request for each restaurant the user is ordering from.
+        for(String restaurantID : ordersByRestaurants.keySet()) {
+            List<Order> foodOrdered = ordersByRestaurants.get(restaurantID);
+            Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(), restriction, foodOrdered);
+            requests.push().setValue(newRequest);
+        }
+
+//        Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(),
+//                restriction, cartData);
 
         //Submit Order -> use CurrentSystemMillis as key!
-        requests.child(String.valueOf(System.currentTimeMillis())).setValue(newRequest);
+      //  requests.child(String.valueOf(System.currentTimeMillis())).setValue(newRequest);
 
         for(Order order : cartData) {
             orderProvider.delete(order);
