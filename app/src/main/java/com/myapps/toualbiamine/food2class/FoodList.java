@@ -65,7 +65,7 @@ public class FoodList extends AppCompatActivity {
     //        ".indexOn":["restaurantID"]
     //      }
     //Use FirebaseUI if you have RecyclerView w ViewHolder to populate it easily!
-    private void loadFoodList(String restaurantID) {
+    private void loadFoodList(final String restaurantID) {
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item, FoodViewHolder.class,
                 //orderByChild -> returns Query where child nodes are ordered by restaurantIDs.
@@ -87,6 +87,7 @@ public class FoodList extends AppCompatActivity {
                         Intent foodDetail = new Intent(getApplicationContext(), FoodDetail.class);
                         //Send FoodID to new page = menuID.
                         foodDetail.putExtra("FoodID", adapter.getRef(position).getKey());
+                        foodDetail.putExtra("RestaurantID", restaurantID);
                         startActivity(foodDetail);
                     }
                 });

@@ -46,6 +46,7 @@ public class FoodDetail extends AppCompatActivity {
     DatabaseReference foods;
 
     String foodID;
+    String restaurantID;
 
     Food currentFood;
 
@@ -82,6 +83,7 @@ public class FoodDetail extends AppCompatActivity {
         //Get FoodID from Intent
         if(getIntent() != null) {
           foodID = getIntent().getStringExtra("FoodID");
+          restaurantID = getIntent().getStringExtra("RestaurantID");
         }
         if(!foodID.isEmpty()) {
             showFoodDetail(foodID);
@@ -92,7 +94,7 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "Order - " + foodID + " " + currentFood.getName() + " " + quantityBtn.getNumber());
 
-                Order newOrder = new Order(Common.orderID, foodID, currentFood.getName(),
+                Order newOrder = new Order(Common.orderID, foodID, restaurantID, currentFood.getName(),
                         quantityBtn.getNumber());
 
                 Common.orderID++;
