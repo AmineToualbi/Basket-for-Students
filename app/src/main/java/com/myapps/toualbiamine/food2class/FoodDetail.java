@@ -1,6 +1,7 @@
 package com.myapps.toualbiamine.food2class;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -74,11 +75,18 @@ public class FoodDetail extends AppCompatActivity {
         foodDescription = (TextView) findViewById(R.id.foodDescription);
         foodImage = (ImageView) findViewById(R.id.foodImg);
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
+        foodName.setTypeface(font);
+        foodDescription.setTypeface(font);
+
         foodDetailToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.foodDetailToolbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         //Apply the created styles in styles.xml to this collapsingToolbarLayout.
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+
+
+
 
         //Get FoodID from Intent
         if(getIntent() != null) {
