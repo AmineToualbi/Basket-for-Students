@@ -120,15 +120,10 @@ public class Cart extends AppCompatActivity {
         //We create a new Request for each restaurant the user is ordering from.
         for(String restaurantID : ordersByRestaurants.keySet()) {
             List<Order> foodOrdered = ordersByRestaurants.get(restaurantID);
-            Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(), restriction, foodOrdered);
-            requests.push().setValue(newRequest);
+            Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(), restriction, foodOrdered, restaurantID);
+            DatabaseReference restaurantDB = database.getReference("Requests/"+restaurantID);       //Pushes to the right restaurant store
+            restaurantDB.push().setValue(newRequest);
         }
-
-//        Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(),
-//                restriction, cartData);
-
-        //Submit Order -> use CurrentSystemMillis as key!
-      //  requests.child(String.valueOf(System.currentTimeMillis())).setValue(newRequest);
 
         for(Order order : cartData) {
             orderProvider.delete(order);
