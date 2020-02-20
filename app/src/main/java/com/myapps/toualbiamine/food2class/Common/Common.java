@@ -10,4 +10,8 @@ public class Common {
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
     public static final String NAME_KEY = "Name";
+    public static final String FLAG_COUNT = "FlagCount";
+
+    public static final String BAN_TITLE = "Account Suspended";
+    public static final String BAN_MSG = "Sorry, it seems like your account is suspended because of multiple orders flagged by employees.";
 }

@@ -172,6 +172,7 @@ public class SignIn extends AppCompatActivity {
                         Paper.book().write(Common.USER_KEY, signInEmail);
                         Paper.book().write(Common.PWD_KEY, signInPassword);
                         Paper.book().write(Common.NAME_KEY, user.getName());
+                        Paper.book().write(Common.FLAG_COUNT, user.getFlagCount());
                     }
 
                     if (!(user.getPassword().equals(signInPassword))) {

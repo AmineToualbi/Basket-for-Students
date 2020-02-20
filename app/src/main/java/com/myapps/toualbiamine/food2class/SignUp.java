@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity {
                 }
 
                 else {
-                    User newUser = new User(signUpEmail, signUpName, signUpPassword);
+                    User newUser = new User(signUpEmail, signUpName, signUpPassword, "0", false);
                     tableUser.child(signUpEmail).setValue(newUser);
 
                     Log.d(TAG, "DB Sign Up : OK");
@@ -173,62 +173,6 @@ public class SignUp extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
-
-    /*    signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                signUpProgressBar.setVisibility(View.VISIBLE);
-
-                //Get the data by querying the DB. This returns a snapshot of everything in the Table "User".
-                tableUser.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        String signUpEmail = convertToFirebaseFormat(emailInput.getText().toString());
-                        String signUpName  = nameInput.getText().toString();
-                        String signUpPassword = passwordInput.getText().toString();
-                        Log.i(TAG, "Sign Up Email = " + signUpEmail);
-
-                        signUpProgressBar.setVisibility(View.INVISIBLE);
-
-                        //Check if wrong email format.
-                        if(signUpEmail.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Wrong email format (firstlast@students.suu.edu)", Toast.LENGTH_SHORT).show();
-
-                        }
-
-                        //Check if user already exists.
-                        else if(dataSnapshot.child(signUpEmail).exists()) {
-                            Toast.makeText(getApplicationContext(), "Account already exists with this email.", Toast.LENGTH_SHORT).show();
-                        }
-
-                        else {
-
-                            User newUser = new User(signUpEmail, signUpName, signUpPassword);
-                            tableUser.child(signUpEmail).setValue(newUser);
-                            Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
-
-                            Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(goToMain);
-
-                            finish();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
-
-            }
-        });*/
-
 
 
     //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.

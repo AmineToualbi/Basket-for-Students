@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
         String rememberedEmail = Paper.book().read(Common.USER_KEY);
         String rememberedPassword = Paper.book().read(Common.PWD_KEY);
         String rememberedName = Paper.book().read(Common.NAME_KEY);
+        String flagCount = Paper.book().read(Common.FLAG_COUNT);
 
         if(rememberedEmail != null && rememberedPassword != null) {
-            User rememberedUser = new User(rememberedEmail, rememberedName, rememberedPassword);
+            User rememberedUser = new User(rememberedEmail, rememberedName, rememberedPassword, flagCount, false);
             Common.currentUser = rememberedUser;
             Intent goToHome = new Intent(getApplicationContext(), Home.class);
             startActivity(goToHome);

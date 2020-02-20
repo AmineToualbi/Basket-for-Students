@@ -1,9 +1,12 @@
 package com.myapps.toualbiamine.food2class;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +15,12 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 import com.myapps.toualbiamine.food2class.Application.DatabaseApp;
 import com.myapps.toualbiamine.food2class.Common.Common;
 import com.myapps.toualbiamine.food2class.Model.Order;
 import com.myapps.toualbiamine.food2class.Model.Request;
+import com.myapps.toualbiamine.food2class.Model.User;
 import com.myapps.toualbiamine.food2class.Providers.IOrderProvider;
 import com.myapps.toualbiamine.food2class.Utils.SwipeToDeleteCallback;
 import com.myapps.toualbiamine.food2class.ViewHolder.CartAdapter;
@@ -51,6 +54,8 @@ public class Cart extends AppCompatActivity {
     Button placeOrderPopupBtn;
     ImageButton closePopupBtn;
     EditText restrictionEditText;
+
+    int flagCount = 0;          //Put it here because we cannot access it from function to check flag count below.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +91,7 @@ public class Cart extends AppCompatActivity {
             public void onClick(View v) {
                 cartData = orderProvider.getAll();
                 if(cartData.isEmpty() == false) {
-                    showDietaryRestrictionPopup(cartData);
+                    checkUserFlagCount(Common.currentUser.getEmail());      //All other functions are called from here bc asynchronous calls are made by Firebase
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Your cart is empty.", Toast.LENGTH_SHORT).show();
@@ -158,6 +163,43 @@ public class Cart extends AppCompatActivity {
                 String restriction = restrictionEditText.getText().toString();
                 placeOrder(cartData, restriction);
                 dietaryRestrictionPopup.dismiss();
+            }
+        });
+    }
+
+    private void displayBanDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Cart.this);
+        builder.setTitle(Common.BAN_TITLE);
+        builder.setMessage(Common.BAN_MSG);
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void checkUserFlagCount(String email) {
+        DatabaseReference users = database.getReference("Users");
+        Log.e("TAG", "email = " + email);
+        users.child(email).child("flagCount").addListenerForSingleValueEvent(new ValueEventListener() {      //This retrieves the value flagCount for the child with the key email
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("TAG", "Inside Listener, flagCount = " + dataSnapshot.getValue().toString());
+                flagCount = Integer.parseInt(dataSnapshot.getValue().toString());
+                if(flagCount < 3) {
+                    showDietaryRestrictionPopup(cartData);
+                }
+                else {
+                    displayBanDialog();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
