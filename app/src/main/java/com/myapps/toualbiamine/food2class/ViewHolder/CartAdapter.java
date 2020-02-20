@@ -21,32 +21,6 @@ import javax.inject.Inject;
 import java.util.List;
 
 
-class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-    public TextView cartItemName;
-    public ImageView cartItemImgCount;
-
-    private ItemClickListener itemClickListener;
-
-    public CartViewHolder(@NonNull final View itemView) {
-        super(itemView);
-        cartItemName = (TextView) itemView.findViewById(R.id.cartItemName);
-        cartItemImgCount = (ImageView) itemView.findViewById(R.id.cartItemImgCount);
-
-        Typeface font = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/restaurant_font.otf");
-        cartItemName.setTypeface(font);
-    }
-
-    @Override
-    public void onClick(View v) { }
-
-    public void setCartItemName(TextView cartItemName) {
-        this.cartItemName = cartItemName;
-    }
-
-}
-
-
 //Adapter is needed to populate our views. In the other parts of the app, we use FirebaseUI bc we retrieve everything from Firebase.
 //Here, we retrieve data from SQLite.
 //Adapter<X> contains the view that we will populate.
@@ -115,3 +89,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     }
 
 }
+
+ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public TextView cartItemName;
+    public ImageView cartItemImgCount;
+
+    private ItemClickListener itemClickListener;
+
+    public CartViewHolder(@NonNull final View itemView) {
+        super(itemView);
+        cartItemName = (TextView) itemView.findViewById(R.id.cartItemName);
+        cartItemImgCount = (ImageView) itemView.findViewById(R.id.cartItemImgCount);
+
+        Typeface font = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/restaurant_font.otf");
+        cartItemName.setTypeface(font);
+    }
+
+    @Override
+    public void onClick(View v) { }
+
+    public void setCartItemName(TextView cartItemName) {
+        this.cartItemName = cartItemName;
+    }
+
+}
+
+

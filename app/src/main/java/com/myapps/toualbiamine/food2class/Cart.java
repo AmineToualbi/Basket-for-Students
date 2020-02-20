@@ -35,6 +35,7 @@ public class Cart extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference requests;
+    DatabaseReference requestsUsers;
 
     TextView mealSwipeTotal;
     Button placeOrderBtn;
@@ -57,7 +58,6 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
-
 
         //Initialize Firebase.
         database = FirebaseDatabase.getInstance();
@@ -121,8 +121,9 @@ public class Cart extends AppCompatActivity {
         for(String restaurantID : ordersByRestaurants.keySet()) {
             List<Order> foodOrdered = ordersByRestaurants.get(restaurantID);
             Request newRequest = new Request(Common.currentUser.getEmail(), Common.currentUser.getName(), restriction, foodOrdered, restaurantID);
-            DatabaseReference restaurantDB = database.getReference("Requests/"+restaurantID);       //Pushes to the right restaurant store
-            restaurantDB.push().setValue(newRequest);
+            //DatabaseReference restaurantDB = database.getReference("Requests/"+restaurantID);       //Pushes to the right restaurant store
+            requests.push().setValue(newRequest);
+           // restaurantDB.push().setValue(newRequest);
         }
 
         for(Order order : cartData) {
