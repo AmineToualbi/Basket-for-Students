@@ -19,4 +19,13 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/noorderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawableTop="@drawable/no_order_burger"
+        android:text="You Have Not Placed Any Orders"
+        android:textColor="#FFFFFF" />
+
 </RelativeLayout>

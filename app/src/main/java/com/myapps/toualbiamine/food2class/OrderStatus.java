@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.*;
 import com.google.firebase.database.core.Path;
@@ -27,6 +30,8 @@ public class OrderStatus extends AppCompatActivity {
     DatabaseReference foods;
     DatabaseReference restaurants;
 
+    TextView noorderTextView;
+
     FirebaseRecyclerAdapter<Request, OrderViewHolder> adapter;
 
     String TAG = "OrderStatusActivity";
@@ -47,6 +52,8 @@ public class OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        noorderTextView = (TextView) findViewById(R.id.noorderTextView);
+
         loadOrders(Common.currentUser.getEmail());
 
         Log.d(TAG, "LoadOrders() from " + Common.currentUser.getEmail());
@@ -61,6 +68,7 @@ public class OrderStatus extends AppCompatActivity {
                 requests.orderByChild("email").equalTo(userEmail)) { //Select * FROM Requests where email = userEmail
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {
+                noorderTextView.setVisibility(View.INVISIBLE);
                 viewHolder.orderID.setText("#" + adapter.getRef(position).getKey());
                 String orderStatus = convertCodeToStatus(model.getStatus());
                 viewHolder.orderStatus.setText(orderStatus);
