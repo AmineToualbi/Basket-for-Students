@@ -14,7 +14,7 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutus);
         description = findViewById(R.id.aboutUsDescription);
-        description.setText("Food2Class is an online food ordering app which enables users to order food anywhere on campus");
+        description.setText("");
         teamNames = findViewById(R.id.aboutUsTeamNames);
         teamNames.setText("Amine Toualbi \nAkhil Anand \nThomas Grant \nParker Hannifin \nJasmine Mixson \nBen Landry Salomon \nAbby Geddes \nSiddharth Mehta \nTrevor Graham");
 

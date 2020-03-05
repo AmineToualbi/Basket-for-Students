@@ -5,14 +5,25 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/foodtogo_bg_smallpng"
+        android:background="@drawable/baskek_bg_smallpng"
         tools:context=".Cart">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="112dp"
+        android:layout_height="119dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="1"
+        android:paddingLeft="15dp"
+        app:srcCompat="@drawable/basket_logo" />
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:id="@+id/cartRecyclerView"/>
+            android:id="@+id/cartRecyclerView">
+
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -47,20 +58,20 @@
             </LinearLayout>
 
             <Button
-                    android:id="@+id/placeOrderBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button"
-                    android:backgroundTint="@color/actionBarColor"
-                    android:textColor="@color/white"
-                    android:text="Place Order"
-                    android:shadowColor="@color/black"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_margin="8dp"
-                    android:layout_alignParentBottom="true"
+                android:id="@+id/placeOrderBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="#c41425"
+                android:shadowColor="@color/black"
+                android:text="Place Order"
+                android:textColor="@color/white"
 
-            />
+                />
 
         </RelativeLayout>
 

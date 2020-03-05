@@ -24,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         signInBtn = (Button) findViewById(R.id.btnSignIn);
         signUpBtn = (Button) findViewById(R.id.btnSignUp);
-        appSlogan = (TextView) findViewById(R.id.slogan);
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
-        appSlogan.setTypeface(font);        //Change fonts of slogan in main screen.
+        //appSlogan.setTypeface(font);        //Change fonts of slogan in main screen.
         signInBtn.setTypeface(font);
         signUpBtn.setTypeface(font);
 

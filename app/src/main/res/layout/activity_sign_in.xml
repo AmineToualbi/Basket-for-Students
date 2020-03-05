@@ -5,16 +5,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/foodtogo_bg_smallpng"
+        android:background="@drawable/baskek_bg_smallpng"
         tools:context="com.myapps.toualbiamine.food2class.SignIn"
         >
 
     <ImageView
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/food2class_logo"/>
+        android:layout_width="121dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        android:paddingLeft="15dp"
+        android:src="@drawable/basket_logo" />
 
     <LinearLayout
             android:id="@+id/linear1"
@@ -27,67 +29,65 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/emailSignIn"
-            android:hint="School Email Address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
-            android:textSize="24sp"
-            android:inputType="textEmailAddress"
-            app:met_baseColor="@android:color/white"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@color/white"
-            app:met_singleLineEllipsis="true"
             android:layout_gravity="center"
+            android:hint="School Email Address"
+            android:inputType="textEmailAddress"
             android:text=""
             android:textAlignment="center"
-            />
+            android:textColorHint="@color/black"
+            android:textColorLink="#C41425"
+            android:textSize="24sp"
+            app:met_baseColor="@color/black"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/black"
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/passwordSignIn"
-                android:hint="Password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/white"
-                android:textSize="24sp"
-                android:inputType="textPassword"
-                app:met_baseColor="@android:color/white"
-                app:met_floatingLabel="highlight"
-                app:met_primaryColor="@color/white"
-                app:met_singleLineEllipsis="true"
-                android:layout_gravity="center"
-                android:text=""
-                android:textAlignment="center"
-        />
+            android:id="@+id/passwordSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:text=""
+            android:textAlignment="center"
+            android:textColorHint="@color/white"
+            android:textColorLink="#C41425"
+            android:textSize="24sp"
+            app:met_baseColor="@color/black"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/white"
+            app:met_singleLineEllipsis="true" />
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <CheckBox
-                    android:id="@+id/rememberMeCb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Remember Me"
-                    android:textColor="@color/white"
-                    android:buttonTint="@color/signIn"
-                    android:layout_weight="1"
-            />
+                android:id="@+id/rememberMeCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="#C41425"
+                android:checked="false"
+                android:layout_gravity="center"
+                android:text="Remember Me"
+                android:textAlignment="center"
+                android:textColor="#C41425"
+                android:textColorLink="#C41425" />
 
             <TextView
-                    android:id="@+id/forgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Forgot Password?"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-            />
-
+                android:id="@+id/forgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Forgot Password?"
+                android:textAlignment="center"
+                android:textColor="#C41425" />
         </LinearLayout>
-
-
 
 
     </LinearLayout>
@@ -96,14 +96,11 @@
         android:id="@+id/signInBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear1"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="57dp"
         android:background="@drawable/circle_button"
-        android:backgroundTint="@color/signIn"
+        android:backgroundTint="#C41425"
         android:shadowColor="@color/black"
         android:text="Sign In"
         android:textColor="@color/white" />

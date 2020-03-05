@@ -22,37 +22,37 @@
         >
 
             <TextView
-                    android:id="@+id/orderID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#111111"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="start"
-            />
+                android:id="@+id/orderID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:text="#111111"
+                android:textAllCaps="true"
+                android:textColorLink="#C41425"
+                android:textStyle="bold" />
 
             <TextView
-                    android:id="@+id/orderStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="STATUS"
-                    android:textStyle="italic"
-                    android:textAllCaps="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="start"
-            />
+                android:id="@+id/orderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:text="STATUS"
+                android:textAllCaps="true"
+                android:textColorLink="#C41425"
+                android:textStyle="italic" />
 
             <TextView
-                    android:id="@+id/orderMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FOOD"
-                    android:textAllCaps="true"
-                    android:textStyle="italic"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="start"
-            />
+                android:id="@+id/orderMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"
+                android:text="FOOD"
+                android:textAllCaps="true"
+                android:textColorLink="#C41425"
+                android:textStyle="italic" />
 
 
         </LinearLayout>

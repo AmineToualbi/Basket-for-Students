@@ -18,69 +18,65 @@
             android:layout_marginRight="7dp"/>
 
     <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="@color/cardview_dark_background">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#808285"
+        app:cardCornerRadius="15dp">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_shopping_cart_black_24dp"
-                    android:tint="@color/actionBarColor"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                android:tint="#C41425" />
 
             <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="Write below any ingredients you want removed from your order"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_gravity="center"
-            />
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Write below any ingredients you want removed from your order"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorLink="#C41425"
+                android:textSize="18sp" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/restrictionEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Dietary Rescritions"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textColorHint="@color/white"
-                    app:met_maxCharacters="100"
-                    app:met_floatingLabel="highlight"
-                    android:layout_marginTop="30dp"
-                    app:met_baseColor="@android:color/white"
-                    app:met_primaryColor="@color/white"
-                    app:met_singleLineEllipsis="true"
-                    android:layout_marginBottom="30dp"
-                    android:inputType="text"
-            />
+                android:id="@+id/restrictionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:hint="Dietary Rescritions"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorLink="#C41425"
+                android:textSize="18sp"
+                app:met_baseColor="@android:color/white"
+                app:met_floatingLabel="highlight"
+                app:met_maxCharacters="100"
+                app:met_primaryColor="@color/white"
+                app:met_singleLineEllipsis="true" />
 
             <Button
-                    android:id="@+id/submitBtn"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/circle_button"
-                    android:text="Submit"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="@color/actionBarColor"
-            />
-
+                android:id="@+id/submitBtn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="#C41425"
+                android:text="Submit"
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
