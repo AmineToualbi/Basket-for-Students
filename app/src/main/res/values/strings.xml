@@ -17,9 +17,10 @@
     <string name="menu_send">Send</string>
     <string name="aboutus">About Us</string>
     <string name="textview_aboutus">aboutus</string>
+    <string name="aboutUsDescription">Food2Class is an online food ordering app which enables users to order food anywhere on campus</string>
     <string name="logo">TODO</string>
     <string name="teammembers">Team Members</string>
-    <string name="team">TextView</string>
+    <string name="teamNames">"Amine Toualbi \nAkhil Anand \nThomas Grant \nParker Hannifin \nJasmine Mixson \nBen Landry Salomon \nAbby Geddes \nSiddharth Mehta \nTrevor Graham"</string>
 
 
 </resources>

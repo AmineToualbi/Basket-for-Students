@@ -99,6 +99,7 @@ public class SignIn extends AppCompatActivity {
                 showForgotPasswordPopup();
             }
         });
+
     }
 
 
@@ -131,7 +132,6 @@ public class SignIn extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getApplicationContext(), "Email sent!", Toast.LENGTH_SHORT).show();
                                         Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
@@ -141,7 +141,6 @@ public class SignIn extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Failed to send reset password email.", Toast.LENGTH_SHORT).show();
 
                                     }
-
                                 }
                             });
                 }
@@ -173,6 +172,7 @@ public class SignIn extends AppCompatActivity {
                         Paper.book().write(Common.PWD_KEY, signInPassword);
                         Paper.book().write(Common.NAME_KEY, user.getName());
                         Paper.book().write(Common.FLAG_COUNT, user.getFlagCount());
+
                     }
 
                     if (!(user.getPassword().equals(signInPassword))) {
@@ -190,6 +190,8 @@ public class SignIn extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
     }
 
@@ -207,7 +209,6 @@ public class SignIn extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.d(TAG, "FirebaseAuth : OK");
-
                     signInProgressBar.setVisibility(View.INVISIBLE);
 
                     if (!task.isSuccessful()) {
@@ -215,9 +216,9 @@ public class SignIn extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
                         }
                         else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                        } else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             Toast.makeText(getApplicationContext(), "No account found for the email address!", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), "" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }

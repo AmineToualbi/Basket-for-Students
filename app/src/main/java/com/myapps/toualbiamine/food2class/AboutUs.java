@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 public class AboutUs extends AppCompatActivity {
 
+
     public TextView teamNames;
     public TextView description;
 
@@ -21,6 +22,11 @@ public class AboutUs extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/restaurant_font.otf");
         description.setTypeface(font);
         teamNames.setTypeface(font);
+    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_aboutus);
+
     }
 
 }
